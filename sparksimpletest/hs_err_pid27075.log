@@ -1,0 +1,988 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 256901120 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2757), pid=27075, tid=0x00007f66261a7700
+#
+# JRE version: OpenJDK Runtime Environment (8.0_242-b08) (build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08)
+# Java VM: OpenJDK 64-Bit Server VM (25.242-b08 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f6658081800):  VMThread [stack: 0x00007f66260a8000,0x00007f66261a8000] [id=27087]
+
+Stack: [0x00007f66260a8000,0x00007f66261a8000],  sp=0x00007f66261a6440,  free space=1017k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xabba52]
+V  [libjvm.so+0x4de2e7]
+V  [libjvm.so+0x8f59f0]
+V  [libjvm.so+0x8ecabe]
+V  [libjvm.so+0x970456]
+V  [libjvm.so+0x9717c8]
+V  [libjvm.so+0x96ddc6]
+V  [libjvm.so+0x966529]
+V  [libjvm.so+0x458ce3]
+V  [libjvm.so+0xabcbd1]
+V  [libjvm.so+0xac2336]
+V  [libjvm.so+0xac0635]
+V  [libjvm.so+0xac0f0d]
+V  [libjvm.so+0xac1318]
+V  [libjvm.so+0x8f2d82]
+
+VM_Operation (0x00007f66603da720): CollectForMetadataAllocation, mode: safepoint, requested by thread 0x00007f665800c000
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f6658f7f000 JavaThread "resolver-5" daemon [_thread_blocked, id=27113, stack(0x00007f65dfeff000,0x00007f65e0000000)]
+  0x00007f6658f7d000 JavaThread "resolver-4" daemon [_thread_blocked, id=27112, stack(0x00007f65f40ef000,0x00007f65f41f0000)]
+  0x00007f6658f7b800 JavaThread "resolver-3" daemon [_thread_blocked, id=27111, stack(0x00007f65f41f0000,0x00007f65f42f1000)]
+  0x00007f6658f7a000 JavaThread "resolver-2" daemon [_thread_blocked, id=27110, stack(0x00007f65f42f1000,0x00007f65f43f2000)]
+  0x00007f6658f79800 JavaThread "resolver-1" daemon [_thread_blocked, id=27109, stack(0x00007f65f43f2000,0x00007f65f44f3000)]
+  0x00007f6614001000 JavaThread "Attach Listener" daemon [_thread_blocked, id=27101, stack(0x00007f65f4cfe000,0x00007f65f4dff000)]
+  0x00007f6658142000 JavaThread "Monitor Ctrl-Break" daemon [_thread_in_native, id=27099, stack(0x00007f662472b000,0x00007f662482c000)]
+  0x00007f66580cb000 JavaThread "Service Thread" daemon [_thread_blocked, id=27097, stack(0x00007f6624d8e000,0x00007f6624e8f000)]
+  0x00007f66580c8000 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=27096, stack(0x00007f6624e90000,0x00007f6624f90000)]
+  0x00007f66580c6800 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=27095, stack(0x00007f6624f91000,0x00007f6625091000)]
+  0x00007f66580c4800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=27094, stack(0x00007f6625092000,0x00007f6625192000)]
+  0x00007f66580c1800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=27093, stack(0x00007f6625193000,0x00007f6625293000)]
+  0x00007f66580bd800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=27092, stack(0x00007f6625293000,0x00007f6625394000)]
+  0x00007f6658090000 JavaThread "Finalizer" daemon [_thread_blocked, id=27089, stack(0x00007f6625ea5000,0x00007f6625fa6000)]
+  0x00007f665808b800 JavaThread "Reference Handler" daemon [_thread_blocked, id=27088, stack(0x00007f6625fa6000,0x00007f66260a7000)]
+  0x00007f665800c000 JavaThread "main" [_thread_blocked, id=27078, stack(0x00007f66602e2000,0x00007f66603e2000)]
+
+Other Threads:
+=>0x00007f6658081800 VMThread [stack: 0x00007f66260a8000,0x00007f66261a8000] [id=27087]
+  0x00007f66580cd800 WatcherThread [stack: 0x00007f6624c8e000,0x00007f6624d8e000] [id=27098]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f6658008480] Threads_lock - owner thread: 0x00007f6658081800
+[0x00007f6658008980] Heap_lock - owner thread: 0x00007f665800c000
+
+heap address: 0x0000000085200000, size: 1966 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ PSYoungGen      total 266752K, used 11979K [0x00000000d7100000, 0x00000000e8600000, 0x0000000100000000)
+  eden space 251904K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6700000)
+  from space 14848K, 80% used [0x00000000e6700000,0x00000000e72b2ec8,0x00000000e7580000)
+  to   space 12800K, 0% used [0x00000000e7580000,0x00000000e7580000,0x00000000e8200000)
+ ParOldGen       total 84992K, used 15451K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 18% used [0x0000000085200000,0x0000000086116e20,0x000000008a500000)
+ Metaspace       used 20603K, capacity 21124K, committed 21248K, reserved 1069056K
+  class space    used 2354K, capacity 2509K, committed 2560K, reserved 1048576K
+
+Card table byte_map: [0x00007f665c44e000,0x00007f665c826000] byte_map_base: 0x00007f665c025000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f665f5803e0
+ Begin Bits: [0x00007f6640290000, 0x00007f6642148000)
+ End Bits:   [0x00007f6642148000, 0x00007f6644000000)
+
+Polling page: 0x00007f6660401000
+
+CodeCache: size=245760Kb used=15044Kb max_used=15093Kb free=230715Kb
+ bounds [0x00007f6649000000, 0x00007f6649ed0000, 0x00007f6658000000]
+ total_blobs=4598 nmethods=4220 adapters=292
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 4.454 Thread 0x00007f66580c1800 4245       4       java.lang.String::<init> (38 bytes)
+Event: 4.455 Thread 0x00007f66580c1800 nmethod 4245 0x00007f6649e9a250 code [0x00007f6649e9a3c0, 0x00007f6649e9a548]
+Event: 4.455 Thread 0x00007f66580c1800 4247       4       java.util.jar.Manifest::getAttributes (14 bytes)
+Event: 4.458 Thread 0x00007f66580c1800 nmethod 4247 0x00007f6649e86d10 code [0x00007f6649e86ea0, 0x00007f6649e87418]
+Event: 4.461 Thread 0x00007f66580c6800 nmethod 4242 0x00007f6649e9ecd0 code [0x00007f6649e9eec0, 0x00007f6649e9f7b8]
+Event: 4.464 Thread 0x00007f66580c4800 nmethod 3860 0x00007f6649eb4550 code [0x00007f6649eb50c0, 0x00007f6649ebf700]
+Event: 4.466 Thread 0x00007f66580c1800 4248       4       java.lang.String::getBytes (27 bytes)
+Event: 4.466 Thread 0x00007f66580c6800 4249       4       java.util.concurrent.ConcurrentHashMap::addCount (292 bytes)
+Event: 4.466 Thread 0x00007f66580c1800 nmethod 4248 0x00007f6649118050 code [0x00007f66491181a0, 0x00007f6649118268]
+Event: 4.469 Thread 0x00007f66580c6800 nmethod 4249 0x00007f664913d910 code [0x00007f664913da80, 0x00007f664913dcd0]
+
+GC Heap History (10 events):
+Event: 0.775 GC heap after
+Heap after GC invocations=2 (full 0):
+ PSYoungGen      total 68608K, used 5090K [0x00000000d7100000, 0x00000000db900000, 0x0000000100000000)
+  eden space 63488K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000daf00000)
+  from space 5120K, 99% used [0x00000000db400000,0x00000000db8f8900,0x00000000db900000)
+  to   space 5120K, 0% used [0x00000000daf00000,0x00000000daf00000,0x00000000db400000)
+ ParOldGen       total 84992K, used 369K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 0% used [0x0000000085200000,0x000000008525c608,0x000000008a500000)
+ Metaspace       used 11002K, capacity 11284K, committed 11520K, reserved 1058816K
+  class space    used 1320K, capacity 1417K, committed 1536K, reserved 1048576K
+}
+Event: 1.489 GC heap before
+{Heap before GC invocations=3 (full 0):
+ PSYoungGen      total 68608K, used 68578K [0x00000000d7100000, 0x00000000db900000, 0x0000000100000000)
+  eden space 63488K, 100% used [0x00000000d7100000,0x00000000daf00000,0x00000000daf00000)
+  from space 5120K, 99% used [0x00000000db400000,0x00000000db8f8900,0x00000000db900000)
+  to   space 5120K, 0% used [0x00000000daf00000,0x00000000daf00000,0x00000000db400000)
+ ParOldGen       total 84992K, used 369K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 0% used [0x0000000085200000,0x000000008525c608,0x000000008a500000)
+ Metaspace       used 15591K, capacity 15868K, committed 16128K, reserved 1062912K
+  class space    used 1858K, capacity 1945K, committed 2048K, reserved 1048576K
+Event: 1.502 GC heap after
+Heap after GC invocations=3 (full 0):
+ PSYoungGen      total 68608K, used 5104K [0x00000000d7100000, 0x00000000df700000, 0x0000000100000000)
+  eden space 63488K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000daf00000)
+  from space 5120K, 99% used [0x00000000daf00000,0x00000000db3fc010,0x00000000db400000)
+  to   space 5120K, 0% used [0x00000000df200000,0x00000000df200000,0x00000000df700000)
+ ParOldGen       total 84992K, used 5316K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 6% used [0x0000000085200000,0x0000000085731128,0x000000008a500000)
+ Metaspace       used 15591K, capacity 15868K, committed 16128K, reserved 1062912K
+  class space    used 1858K, capacity 1945K, committed 2048K, reserved 1048576K
+}
+Event: 1.947 GC heap before
+{Heap before GC invocations=4 (full 0):
+ PSYoungGen      total 68608K, used 68592K [0x00000000d7100000, 0x00000000df700000, 0x0000000100000000)
+  eden space 63488K, 100% used [0x00000000d7100000,0x00000000daf00000,0x00000000daf00000)
+  from space 5120K, 99% used [0x00000000daf00000,0x00000000db3fc010,0x00000000db400000)
+  to   space 5120K, 0% used [0x00000000df200000,0x00000000df200000,0x00000000df700000)
+ ParOldGen       total 84992K, used 5316K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 6% used [0x0000000085200000,0x0000000085731128,0x000000008a500000)
+ Metaspace       used 16008K, capacity 16318K, committed 16640K, reserved 1064960K
+  class space    used 1867K, capacity 1956K, committed 2048K, reserved 1048576K
+Event: 1.958 GC heap after
+Heap after GC invocations=4 (full 0):
+ PSYoungGen      total 132096K, used 5104K [0x00000000d7100000, 0x00000000df700000, 0x0000000100000000)
+  eden space 126976K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000ded00000)
+  from space 5120K, 99% used [0x00000000df200000,0x00000000df6fc010,0x00000000df700000)
+  to   space 5120K, 0% used [0x00000000ded00000,0x00000000ded00000,0x00000000df200000)
+ ParOldGen       total 84992K, used 8736K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 10% used [0x0000000085200000,0x0000000085a88138,0x000000008a500000)
+ Metaspace       used 16008K, capacity 16318K, committed 16640K, reserved 1064960K
+  class space    used 1867K, capacity 1956K, committed 2048K, reserved 1048576K
+}
+Event: 2.871 GC heap before
+{Heap before GC invocations=5 (full 0):
+ PSYoungGen      total 132096K, used 132080K [0x00000000d7100000, 0x00000000df700000, 0x0000000100000000)
+  eden space 126976K, 100% used [0x00000000d7100000,0x00000000ded00000,0x00000000ded00000)
+  from space 5120K, 99% used [0x00000000df200000,0x00000000df6fc010,0x00000000df700000)
+  to   space 5120K, 0% used [0x00000000ded00000,0x00000000ded00000,0x00000000df200000)
+ ParOldGen       total 84992K, used 8736K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 10% used [0x0000000085200000,0x0000000085a88138,0x000000008a500000)
+ Metaspace       used 16602K, capacity 17058K, committed 17408K, reserved 1064960K
+  class space    used 1880K, capacity 1988K, committed 2048K, reserved 1048576K
+Event: 2.902 GC heap after
+Heap after GC invocations=5 (full 0):
+ PSYoungGen      total 132096K, used 5104K [0x00000000d7100000, 0x00000000e8200000, 0x0000000100000000)
+  eden space 126976K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000ded00000)
+  from space 5120K, 99% used [0x00000000ded00000,0x00000000df1fc030,0x00000000df200000)
+  to   space 12800K, 0% used [0x00000000e7580000,0x00000000e7580000,0x00000000e8200000)
+ ParOldGen       total 84992K, used 14387K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 16% used [0x0000000085200000,0x000000008600cd90,0x000000008a500000)
+ Metaspace       used 16602K, capacity 17058K, committed 17408K, reserved 1064960K
+  class space    used 1880K, capacity 1988K, committed 2048K, reserved 1048576K
+}
+Event: 4.045 GC heap before
+{Heap before GC invocations=6 (full 0):
+ PSYoungGen      total 132096K, used 132080K [0x00000000d7100000, 0x00000000e8200000, 0x0000000100000000)
+  eden space 126976K, 100% used [0x00000000d7100000,0x00000000ded00000,0x00000000ded00000)
+  from space 5120K, 99% used [0x00000000ded00000,0x00000000df1fc030,0x00000000df200000)
+  to   space 12800K, 0% used [0x00000000e7580000,0x00000000e7580000,0x00000000e8200000)
+ ParOldGen       total 84992K, used 14387K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 16% used [0x0000000085200000,0x000000008600cd90,0x000000008a500000)
+ Metaspace       used 17662K, capacity 18180K, committed 18304K, reserved 1064960K
+  class space    used 1992K, capacity 2103K, committed 2176K, reserved 1048576K
+Event: 4.058 GC heap after
+Heap after GC invocations=6 (full 0):
+ PSYoungGen      total 264704K, used 12468K [0x00000000d7100000, 0x00000000e8600000, 0x0000000100000000)
+  eden space 251904K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6700000)
+  from space 12800K, 97% used [0x00000000e7580000,0x00000000e81ad028,0x00000000e8200000)
+  to   space 14848K, 0% used [0x00000000e6700000,0x00000000e6700000,0x00000000e7580000)
+ ParOldGen       total 84992K, used 14395K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 16% used [0x0000000085200000,0x000000008600ed90,0x000000008a500000)
+ Metaspace       used 17662K, capacity 18180K, committed 18304K, reserved 1064960K
+  class space    used 1992K, capacity 2103K, committed 2176K, reserved 1048576K
+}
+Event: 4.508 GC heap before
+{Heap before GC invocations=7 (full 0):
+ PSYoungGen      total 264704K, used 65363K [0x00000000d7100000, 0x00000000e8600000, 0x0000000100000000)
+  eden space 251904K, 20% used [0x00000000d7100000,0x00000000da4a7ea0,0x00000000e6700000)
+  from space 12800K, 97% used [0x00000000e7580000,0x00000000e81ad028,0x00000000e8200000)
+  to   space 14848K, 0% used [0x00000000e6700000,0x00000000e6700000,0x00000000e7580000)
+ ParOldGen       total 84992K, used 14395K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 16% used [0x0000000085200000,0x000000008600ed90,0x000000008a500000)
+ Metaspace       used 20603K, capacity 21124K, committed 21248K, reserved 1069056K
+  class space    used 2354K, capacity 2509K, committed 2560K, reserved 1048576K
+
+Deoptimization events (10 events):
+Event: 4.409 Thread 0x00007f665800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f66499a444c method=org.apache.maven.model.Dependency.clone()Lorg/apache/maven/model/Dependency; @ 76
+Event: 4.409 Thread 0x00007f665800c000 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007f6649cfb31c method=org.apache.maven.model.Organization.clone()Lorg/apache/maven/model/Organization; @ 16
+Event: 4.409 Thread 0x00007f665800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6649c453a4 method=org.apache.maven.model.Contributor.clone()Lorg/apache/maven/model/Contributor; @ 65
+Event: 4.409 Thread 0x00007f665800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6649c3b7f4 method=org.apache.maven.model.Contributor.clone()Lorg/apache/maven/model/Contributor; @ 65
+Event: 4.421 Thread 0x00007f665800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f6649c12e54 method=org.codehaus.plexus.util.xml.Xpp3DomBuilder.build(Lorg/codehaus/plexus/util/xml/pull/XmlPullParser;ZLorg/codehaus/plexus/util/xml/Xpp3DomBuilder$InputLocationBuilder;)Lorg/c
+Event: 4.421 Thread 0x00007f665800c000 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007f6649c8a8dc method=org.apache.maven.model.DistributionManagement.clone()Lorg/apache/maven/model/DistributionManagement; @ 88
+Event: 4.422 Thread 0x00007f665800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f66499daa3c method=org.apache.maven.model.Dependency.clone()Lorg/apache/maven/model/Dependency; @ 76
+Event: 4.434 Thread 0x00007f6658f79800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007f6649ad1478 method=java.lang.StringCoding.encode(Ljava/lang/String;[CII)[B @ 6
+Event: 4.434 Thread 0x00007f6658f7a000 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007f6649ace38c method=java.lang.StringCoding.encode(Ljava/lang/String;[CII)[B @ 6
+Event: 4.450 Thread 0x00007f665800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f66497fdb38 method=java.util.ArrayList.remove(Ljava/lang/Object;)Z @ 59
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 4.029 Thread 0x00007f665800c000 Exception <a 'java/io/FileNotFoundException'> (0x00000000deb3c4d8) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jni.cpp, line 710]
+Event: 4.060 Thread 0x00007f665800c000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d7464130) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jvm.cpp, line 1502]
+Event: 4.060 Thread 0x00007f665800c000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d7464710) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jvm.cpp, line 1502]
+Event: 4.060 Thread 0x00007f665800c000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d7465cc0) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jvm.cpp, line 1502]
+Event: 4.060 Thread 0x00007f665800c000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d74662a0) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jvm.cpp, line 1502]
+Event: 4.144 Thread 0x00007f665800c000 Exception <a 'java/lang/NoClassDefFoundError': org/sonatype/aether/graph/Dependency> (0x00000000d7d06220) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 199]
+Event: 4.379 Thread 0x00007f665800c000 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000000d8d5f948) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/methodHandles.cpp, line 1167]
+Event: 4.381 Thread 0x00007f665800c000 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000000d8d6d008) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/methodHandles.cpp, line 1167]
+Event: 4.434 Thread 0x00007f6658f79800 Implicit null exception at 0x00007f6649ad0ec9 to 0x00007f6649ad1461
+Event: 4.434 Thread 0x00007f6658f7a000 Implicit null exception at 0x00007f6649acdddf to 0x00007f6649ace375
+
+Events (10 events):
+Event: 4.505 loading class scala/collection/Iterator done
+Event: 4.506 loading class scala/collection/immutable/$colon$colon
+Event: 4.506 loading class scala/collection/immutable/$colon$colon done
+Event: 4.506 loading class scala/collection/immutable/$colon$colon
+Event: 4.506 loading class scala/collection/immutable/$colon$colon done
+Event: 4.507 loading class scala/util/Either
+Event: 4.507 loading class scala/util/Either done
+Event: 4.507 loading class scala/util/Either
+Event: 4.507 loading class scala/util/Either done
+Event: 4.508 Executing VM operation: CollectForMetadataAllocation
+
+
+Dynamic libraries:
+85200000-8a500000 rw-p 00000000 00:00 0 
+8a500000-d7100000 ---p 00000000 00:00 0 
+d7100000-e8600000 rw-p 00000000 00:00 0 
+f7b00000-100000000 ---p 00000000 00:00 0 
+100000000-100280000 rw-p 00000000 00:00 0 
+100280000-140000000 ---p 00000000 00:00 0 
+55f1e4d90000-55f1e4d91000 r-xp 00000000 08:02 6687783                    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+55f1e4f90000-55f1e4f91000 r--p 00000000 08:02 6687783                    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+55f1e4f91000-55f1e4f92000 rw-p 00001000 08:02 6687783                    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+55f1e6a74000-55f1e6a95000 rw-p 00000000 00:00 0                          [heap]
+7f65d4000000-7f65d4021000 rw-p 00000000 00:00 0 
+7f65d4021000-7f65d8000000 ---p 00000000 00:00 0 
+7f65d8000000-7f65d8021000 rw-p 00000000 00:00 0 
+7f65d8021000-7f65dc000000 ---p 00000000 00:00 0 
+7f65dfcff000-7f65dfd3f000 rw-p 00000000 00:00 0 
+7f65dfd3f000-7f65dfeff000 ---p 00000000 00:00 0 
+7f65dfeff000-7f65dff02000 ---p 00000000 00:00 0 
+7f65dff02000-7f65e0000000 rw-p 00000000 00:00 0 
+7f65e0000000-7f65e0021000 rw-p 00000000 00:00 0 
+7f65e0021000-7f65e4000000 ---p 00000000 00:00 0 
+7f65e4000000-7f65e4021000 rw-p 00000000 00:00 0 
+7f65e4021000-7f65e8000000 ---p 00000000 00:00 0 
+7f65e8000000-7f65e8021000 rw-p 00000000 00:00 0 
+7f65e8021000-7f65ec000000 ---p 00000000 00:00 0 
+7f65ec000000-7f65ec021000 rw-p 00000000 00:00 0 
+7f65ec021000-7f65f0000000 ---p 00000000 00:00 0 
+7f65f0000000-7f65f0021000 rw-p 00000000 00:00 0 
+7f65f0021000-7f65f4000000 ---p 00000000 00:00 0 
+7f65f40ef000-7f65f40f2000 ---p 00000000 00:00 0 
+7f65f40f2000-7f65f41f0000 rw-p 00000000 00:00 0 
+7f65f41f0000-7f65f41f3000 ---p 00000000 00:00 0 
+7f65f41f3000-7f65f42f1000 rw-p 00000000 00:00 0 
+7f65f42f1000-7f65f42f4000 ---p 00000000 00:00 0 
+7f65f42f4000-7f65f43f2000 rw-p 00000000 00:00 0 
+7f65f43f2000-7f65f43f5000 ---p 00000000 00:00 0 
+7f65f43f5000-7f65f46f3000 rw-p 00000000 00:00 0 
+7f65f46f3000-7f65f4706000 r--s 0010b000 08:02 12853213                   /home/geospark/.m2/repository/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar
+7f65f4706000-7f65f4715000 r--s 0014d000 08:02 13898963                   /home/geospark/.m2/repository/com/google/protobuf/protobuf-java/3.7.0/protobuf-java-3.7.0.jar
+7f65f4715000-7f65f4717000 r--s 00017000 08:02 11679371                   /home/geospark/.m2/repository/org/scala-sbt/zinc-classfile_2.12/1.3.2/zinc-classfile_2.12-1.3.2.jar
+7f65f4717000-7f65f4719000 r--s 00002000 08:02 11938457                   /home/geospark/.m2/repository/org/scala-sbt/util-control_2.12/1.3.0/util-control_2.12-1.3.0.jar
+7f65f4719000-7f65f471d000 r--s 00033000 08:02 12853211                   /home/geospark/.m2/repository/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar
+7f65f471d000-7f65f471e000 r--s 00002000 08:02 11812041                   /home/geospark/.m2/repository/org/scala-sbt/launcher-interface/1.0.0/launcher-interface-1.0.0.jar
+7f65f471e000-7f65f4721000 r--s 00035000 08:02 11938455                   /home/geospark/.m2/repository/org/scala-sbt/zinc-compile-core_2.12/1.3.2/zinc-compile-core_2.12-1.3.2.jar
+7f65f4721000-7f65f4727000 r--s 00080000 08:02 12853209                   /home/geospark/.m2/repository/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6.jar
+7f65f4727000-7f65f472a000 r--s 0002a000 08:02 11938453                   /home/geospark/.m2/repository/org/scala-sbt/sbinary_2.12/0.5.0/sbinary_2.12-0.5.0.jar
+7f65f472a000-7f65f4737000 r--s 001ae000 08:02 11812039                   /home/geospark/.m2/repository/org/scala-sbt/zinc-persist_2.12/1.3.2/zinc-persist_2.12-1.3.2.jar
+7f65f4737000-7f65f4738000 r--s 00003000 08:02 11812037                   /home/geospark/.m2/repository/org/scala-sbt/util-relation_2.12/1.3.0/util-relation_2.12-1.3.0.jar
+7f65f4738000-7f65f475b000 r--s 00357000 08:02 12720961                   /home/geospark/.m2/repository/org/scala-lang/scala-reflect/2.12.8/scala-reflect-2.12.8.jar
+7f65f475b000-7f65f475d000 r--s 00011000 08:02 11812035                   /home/geospark/.m2/repository/org/spire-math/jawn-parser_2.12/0.10.4/jawn-parser_2.12-0.10.4.jar
+7f65f475d000-7f65f475f000 r--s 0000f000 08:02 13771734                   /home/geospark/.m2/repository/com/eed3si9n/shaded-scalajson_2.12/1.0.0-M4/shaded-scalajson_2.12-1.0.0-M4.jar
+7f65f475f000-7f65f4761000 r--s 00008000 08:02 13771732                   /home/geospark/.m2/repository/com/eed3si9n/sjson-new-scalajson_2.12/0.8.3/sjson-new-scalajson_2.12-0.8.3.jar
+7f65f4761000-7f65f4764000 r--s 00012000 08:02 13771730                   /home/geospark/.m2/repository/com/lmax/disruptor/3.4.2/disruptor-3.4.2.jar
+7f65f4764000-7f65f4785000 r--s 0016d000 08:02 11812033                   /home/geospark/.m2/repository/org/apache/logging/log4j/log4j-core/2.11.2/log4j-core-2.11.2.jar
+7f65f4785000-7f65f478b000 r--s 0003c000 08:02 11812031                   /home/geospark/.m2/repository/org/apache/logging/log4j/log4j-api/2.11.2/log4j-api-2.11.2.jar
+7f65f478b000-7f65f478f000 r--s 0003e000 08:02 531900                     /home/geospark/.m2/repository/jline/jline/2.14.6/jline-2.14.6.jar
+7f65f478f000-7f65f4795000 r--s 000be000 08:02 13771728                   /home/geospark/.m2/repository/com/eed3si9n/sjson-new-core_2.12/0.8.3/sjson-new-core_2.12-0.8.3.jar
+7f65f4795000-7f65f4799000 r--s 00041000 08:02 11679369                   /home/geospark/.m2/repository/org/scala-sbt/util-logging_2.12/1.3.0/util-logging_2.12-1.3.0.jar
+7f65f4799000-7f65f47b3000 r--s 0021e000 08:02 14689458                   /home/geospark/.m2/repository/net/java/dev/jna/jna-platform/4.5.0/jna-platform-4.5.0.jar
+7f65f47b3000-7f65f47b7000 r--s 0015c000 08:02 14689456                   /home/geospark/.m2/repository/net/java/dev/jna/jna/4.5.0/jna-4.5.0.jar
+7f65f47b7000-7f65f47bc000 r--s 0002f000 08:02 13771727                   /home/geospark/.m2/repository/com/swoval/file-tree-views/2.1.3/file-tree-views-2.1.3.jar
+7f65f47bc000-7f65f47c4000 r--s 00091000 08:02 11679367                   /home/geospark/.m2/repository/org/scala-sbt/io_2.12/1.3.0/io_2.12-1.3.0.jar
+7f65f47c4000-7f65f47c6000 r--s 00019000 08:02 13771724                   /home/geospark/.m2/repository/com/lihaoyi/sourcecode_2.12/0.1.3/sourcecode_2.12-0.1.3.jar
+7f65f47c6000-7f65f47c8000 r--s 0000e000 08:02 13771723                   /home/geospark/.m2/repository/com/lihaoyi/fastparse-utils_2.12/0.4.2/fastparse-utils_2.12-0.4.2.jar
+7f65f47c8000-7f65f47cc000 r--s 00047000 08:02 13771720                   /home/geospark/.m2/repository/com/lihaoyi/fastparse_2.12/0.4.2/fastparse_2.12-0.4.2.jar
+7f65f47cc000-7f65f47ce000 r--s 00007000 08:02 13771718                   /home/geospark/.m2/repository/com/trueaccord/lenses/lenses_2.12/0.4.12/lenses_2.12-0.4.12.jar
+7f65f47ce000-7f65f47db000 r--s 001a6000 08:02 13771716                   /home/geospark/.m2/repository/com/trueaccord/scalapb/scalapb-runtime_2.12/0.6.0/scalapb-runtime_2.12-0.6.0.jar
+7f65f47db000-7f65f47dc000 r--s 00000000 08:02 11576894                   /home/geospark/.m2/repository/org/scala-sbt/util-interface/1.3.0/util-interface-1.3.0.jar
+7f65f47dc000-7f65f47df000 r--s 00014000 08:02 11576883                   /home/geospark/.m2/repository/org/scala-sbt/compiler-interface/1.3.2/compiler-interface-1.3.2.jar
+7f65f47df000-7f65f482f000 r--s 009de000 08:02 12458261                   /home/geospark/.m2/repository/org/scala-lang/scala-compiler/2.12.10/scala-compiler-2.12.10.jar
+7f65f482f000-7f65f4831000 r--s 00012000 08:02 11812029                   /home/geospark/.m2/repository/org/scala-sbt/zinc-classpath_2.12/1.3.2/zinc-classpath_2.12-1.3.2.jar
+7f65f4831000-7f65f4834000 r--s 00035000 08:02 11679365                   /home/geospark/.m2/repository/org/scala-sbt/compiler-bridge_2.12/1.3.2/compiler-bridge_2.12-1.3.2.jar
+7f65f4834000-7f65f4836000 r--s 00024000 08:02 11576890                   /home/geospark/.m2/repository/org/scala-sbt/zinc-apiinfo_2.12/1.3.2/zinc-apiinfo_2.12-1.3.2.jar
+7f65f4836000-7f65f483b000 r--s 00083000 08:02 11576888                   /home/geospark/.m2/repository/org/scala-sbt/zinc-core_2.12/1.3.2/zinc-core_2.12-1.3.2.jar
+7f65f483b000-7f65f4873000 r--s 004d1000 08:02 12197396                   /home/geospark/.m2/repository/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10.jar
+7f65f4873000-7f65f4874000 r--s 0000f000 08:02 11576884                   /home/geospark/.m2/repository/org/scala-sbt/zinc_2.12/1.3.2/zinc_2.12-1.3.2.jar
+7f65f4874000-7f65f4876000 r--s 00007000 08:02 11933918                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-invoker/3.0.1/maven-invoker-3.0.1.jar
+7f65f4876000-7f65f4877000 r--s 00002000 08:02 14427787                   /home/geospark/.m2/repository/org/apache/maven/doxia/doxia-logging-api/1.9/doxia-logging-api-1.9.jar
+7f65f4877000-7f65f4878000 r--s 00002000 08:02 13113837                   /home/geospark/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.9/doxia-sink-api-1.9.jar
+7f65f4878000-7f65f487c000 r--s 0002f000 08:02 11576862                   /home/geospark/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar
+7f65f487c000-7f65f487f000 r--s 00026000 08:02 11933920                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.2.1/maven-shared-utils-3.2.1.jar
+7f65f487f000-7f65f4881000 r--s 00005000 08:02 13377478                   /home/geospark/.m2/repository/org/apache/maven/maven-archiver/3.5.0/maven-archiver-3.5.0.jar
+7f65f4881000-7f65f4889000 r--s 00049000 08:02 14028147                   /home/geospark/.m2/repository/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar
+7f65f4889000-7f65f488d000 r--s 00017000 08:02 284040                     /home/geospark/.m2/repository/org/tukaani/xz/1.8/xz-1.8.jar
+7f65f488d000-7f65f488f000 r--s 0000d000 08:02 11576876                   /home/geospark/.m2/repository/org/iq80/snappy/snappy/0.4/snappy-0.4.jar
+7f65f488f000-7f65f489b000 r--s 0008b000 08:02 11576875                   /home/geospark/.m2/repository/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar
+7f65f489b000-7f65f489e000 r--s 00010000 08:02 13377479                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-io/3.2.0/plexus-io-3.2.0.jar
+7f65f489e000-7f65f48a3000 r--s 0002b000 08:02 13377477                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-archiver/4.2.1/plexus-archiver-4.2.1.jar
+7f65f48a3000-7f65f48a7000 r--s 0003d000 08:02 11576872                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/3.3.0/plexus-utils-3.3.0.jar
+7f65f48a7000-7f65f48a9000 r--s 0000c000 08:02 11576871                   /home/geospark/.m2/repository/org/apache/commons/commons-exec/1.3/commons-exec-1.3.jar
+7f65f48a9000-7f65f48ab000 r--s 00007000 08:02 14298550                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-dependency-tree/3.0.1/maven-dependency-tree-3.0.1.jar
+7f65f48ab000-7f65f48b2000 r--s 00064000 08:02 11576867                   /home/geospark/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar
+7f65f48b2000-7f65f48b4000 r--s 00002000 08:02 11411769                   /home/geospark/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar
+7f65f48b4000-7f65f48b5000 r--s 00006000 08:02 11273992                   /home/geospark/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar
+7f65f48b5000-7f65f48b7000 r--s 00000000 08:02 524762                     /home/geospark/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+7f65f48b7000-7f65f48c0000 r--s 0005f000 08:02 14030520                   /home/geospark/.m2/repository/com/google/inject/guice/4.0/guice-4.0-no_aop.jar
+7f65f48c0000-7f65f48c4000 r--s 00020000 08:02 284042                     /home/geospark/.m2/repository/org/eclipse/aether/aether-util/1.0.2.v20150114/aether-util-1.0.2.v20150114.jar
+7f65f48c4000-7f65f48cb000 r--s 00000000 08:02 6949698                    /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+7f65f48cb000-7f65f48f2000 r--p 00000000 08:02 7474007                    /usr/share/locale-langpack/ko/LC_MESSAGES/libc.mo
+7f65f48f2000-7f65f48f3000 r--s 00002000 08:02 12977311                   /home/geospark/.m2/repository/org/apache/maven/reporting/maven-reporting-api/3.0/maven-reporting-api-3.0.jar
+7f65f48f3000-7f65f48fb000 r--s 00055000 08:02 284033                     /home/geospark/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.2/org.eclipse.sisu.inject-0.3.2.jar
+7f65f48fb000-7f65f48fe000 r--s 00008000 08:02 15474960                   /home/geospark/.m2/repository/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar
+7f65f48fe000-7f65f4afe000 rw-p 00000000 00:00 0 
+7f65f4afe000-7f65f4cfe000 rw-p 00000000 00:00 0 
+7f65f4cfe000-7f65f4d01000 ---p 00000000 00:00 0 
+7f65f4d01000-7f65f4fff000 rw-p 00000000 00:00 0 
+7f65f4fff000-7f65f8000000 rw-p 00000000 00:00 0 
+7f65f8000000-7f65f8021000 rw-p 00000000 00:00 0 
+7f65f8021000-7f65fc000000 ---p 00000000 00:00 0 
+7f65fc000000-7f65fc021000 rw-p 00000000 00:00 0 
+7f65fc021000-7f6600000000 ---p 00000000 00:00 0 
+7f6600000000-7f6601904000 rw-p 00000000 00:00 0 
+7f6601904000-7f6604000000 ---p 00000000 00:00 0 
+7f6604000000-7f66053fa000 rw-p 00000000 00:00 0 
+7f66053fa000-7f6608000000 ---p 00000000 00:00 0 
+7f6608000000-7f66090ba000 rw-p 00000000 00:00 0 
+7f66090ba000-7f660c000000 ---p 00000000 00:00 0 
+7f660c000000-7f660d431000 rw-p 00000000 00:00 0 
+7f660d431000-7f6610000000 ---p 00000000 00:00 0 
+7f6610000000-7f6610021000 rw-p 00000000 00:00 0 
+7f6610021000-7f6614000000 ---p 00000000 00:00 0 
+7f6614000000-7f6614021000 rw-p 00000000 00:00 0 
+7f6614021000-7f6618000000 ---p 00000000 00:00 0 
+7f6618000000-7f6618021000 rw-p 00000000 00:00 0 
+7f6618021000-7f661c000000 ---p 00000000 00:00 0 
+7f661c000000-7f661c021000 rw-p 00000000 00:00 0 
+7f661c021000-7f6620000000 ---p 00000000 00:00 0 
+7f6620000000-7f6620021000 rw-p 00000000 00:00 0 
+7f6620021000-7f6624000000 ---p 00000000 00:00 0 
+7f6624000000-7f662402b000 r--s 001fc000 08:02 14030518                   /home/geospark/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar
+7f662402b000-7f662422b000 rw-p 00000000 00:00 0 
+7f662422b000-7f662422d000 r-xp 00000000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f662422d000-7f662442c000 ---p 00002000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f662442c000-7f662442d000 r--p 00001000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f662442d000-7f662442e000 rw-p 00002000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f662442e000-7f6624430000 r--s 00000000 08:02 11576853                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.6/plexus-component-annotations-1.6.jar
+7f6624430000-7f6624433000 r--s 0000d000 08:02 11576857                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.21/plexus-interpolation-1.21.jar
+7f6624433000-7f6624434000 r--s 00003000 08:02 11576850                   /home/geospark/.m2/repository/org/apache/maven/maven-builder-support/3.3.9/maven-builder-support-3.3.9.jar
+7f6624434000-7f6624437000 r--s 0001d000 08:02 13245661                   /home/geospark/.m2/repository/net/alchim31/maven/scala-maven-plugin/4.3.1/scala-maven-plugin-4.3.1.jar
+7f6624437000-7f6624439000 r--s 0000d000 08:02 13243419                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.13/plexus-interpolation-1.13.jar
+7f6624439000-7f662443a000 r--s 00001000 08:02 11677793                   /home/geospark/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.jar
+7f662443a000-7f662443c000 r--s 00009000 08:02 13243417                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-filtering/1.1/maven-filtering-1.1.jar
+7f662443c000-7f6624440000 r--s 00033000 08:02 10887023                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.5/plexus-utils-2.0.5.jar
+7f6624440000-7f6624443000 r--s 0001b000 08:02 12589432                   /home/geospark/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar
+7f6624443000-7f6624445000 r--s 00002000 08:02 13243411                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar
+7f6624445000-7f6624447000 r--s 00006000 08:02 13111142                   /home/geospark/.m2/repository/commons-cli/commons-cli/1.0/commons-cli-1.0.jar
+7f6624447000-7f6624448000 r--s 00001000 08:02 13111137                   /home/geospark/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+7f6624448000-7f6624449000 r--s 00002000 08:02 12977297                   /home/geospark/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+7f6624449000-7f662444b000 r--s 00006000 08:02 11677777                   /home/geospark/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+7f662444b000-7f662444c000 r--s 00001000 08:02 14160269                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven-event-listener.jar
+7f662444c000-7f662444f000 r-xp 00000000 08:02 14301885                   /tmp/libjansi-1.17.1-5986691697350223899.so
+7f662444f000-7f662464e000 ---p 00003000 08:02 14301885                   /tmp/libjansi-1.17.1-5986691697350223899.so
+7f662464e000-7f662464f000 rw-p 00002000 08:02 14301885                   /tmp/libjansi-1.17.1-5986691697350223899.so
+7f662464f000-7f6624654000 r--s 000a3000 08:02 6695489                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar
+7f6624654000-7f6624656000 r--s 00009000 08:02 14160378                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-settings-builder-3.6.1.jar
+7f6624656000-7f6624658000 r--s 00001000 08:02 14160337                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/j2objc-annotations-1.1.jar
+7f6624658000-7f6624659000 r--s 00003000 08:02 14160362                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-builder-support-3.6.1.jar
+7f6624659000-7f662465b000 r--s 00003000 08:02 14160356                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jcl-over-slf4j-1.7.25.jar
+7f662465b000-7f662465f000 r--s 0002f000 08:02 14160330                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/commons-io-2.5.jar
+7f662465f000-7f6624667000 r--s 00073000 08:02 14160331                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/commons-lang3-3.8.1.jar
+7f6624667000-7f6624669000 r--s 00002000 08:02 14160332                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/error_prone_annotations-2.1.3.jar
+7f6624669000-7f6624674000 r--s 00075000 08:02 14160336                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/guice-4.2.1-no_aop.jar
+7f6624674000-7f6624677000 r--s 00012000 08:02 14160387                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-interpolation-1.25.jar
+7f6624677000-7f662467a000 r--s 00026000 08:02 14160379                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-shared-utils-3.2.1.jar
+7f662467a000-7f6624680000 r--s 0002d000 08:02 14160383                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/org.eclipse.sisu.plexus-0.3.3.jar
+7f6624680000-7f6624681000 r--s 00001000 08:02 14160358                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jsr250-api-1.0.jar
+7f6624681000-7f662468e000 r--s 0008e000 08:02 14160364                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-core-3.6.1.jar
+7f662468e000-7f662468f000 r--s 00006000 08:02 14160369                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-repository-metadata-3.6.1.jar
+7f662468f000-7f6624692000 r--s 0002b000 08:02 14160366                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-model-3.6.1.jar
+7f6624692000-7f6624694000 r--s 00006000 08:02 14160375                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-transport-wagon-1.3.3.jar
+7f6624694000-7f662469b000 r--s 00056000 08:02 14160381                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/org.eclipse.sisu.inject-0.3.3.jar
+7f662469b000-7f662469f000 r--s 00023000 08:02 14160376                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-util-1.3.3.jar
+7f662469f000-7f66246a3000 r--s 00042000 08:02 14160338                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jansi-1.17.1.jar
+7f66246a3000-7f66246a9000 r--s 00041000 08:02 14160363                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-compat-3.6.1.jar
+7f66246a9000-7f66246ab000 r--s 0000f000 08:02 14160373                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-provider-3.6.1.jar
+7f66246ab000-7f66246d9000 r--s 001eb000 08:02 14160393                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/wagon-http-3.3.2-shaded.jar
+7f66246d9000-7f66246db000 r--s 00009000 08:02 14160390                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/slf4j-api-1.7.25.jar
+7f66246db000-7f66246dc000 r--s 00006000 08:02 14160388                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-sec-dispatcher-1.4.jar
+7f66246dc000-7f66246df000 r--s 00016000 08:02 14160365                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-embedder-3.6.1.jar
+7f66246df000-7f66246e1000 r--s 00000000 08:02 14160325                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/aopalliance-1.0.jar
+7f66246e1000-7f66246e6000 r--s 00027000 08:02 14160367                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-model-builder-3.6.1.jar
+7f66246e6000-7f66246e8000 r--s 00009000 08:02 14160371                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-connector-basic-1.3.3.jar
+7f66246e8000-7f66246ed000 r--s 00020000 08:02 14160370                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-api-1.3.3.jar
+7f66246ed000-7f66246ee000 r--s 00005000 08:02 14160380                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-slf4j-provider-3.6.1.jar
+7f66246ee000-7f66246f0000 r--s 0000c000 08:02 14160329                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/commons-cli-1.4.jar
+7f66246f0000-7f66246f2000 r--s 00007000 08:02 14160374                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-spi-1.3.3.jar
+7f66246f2000-7f66246f4000 r--s 0000a000 08:02 14160368                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-plugin-api-3.6.1.jar
+7f66246f4000-7f66246f6000 r--s 00000000 08:02 14160386                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-component-annotations-1.7.1.jar
+7f66246f6000-7f66246f8000 r--s 00003000 08:02 14160360                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jsr305-3.0.2.jar
+7f66246f8000-7f66246fb000 r--s 00008000 08:02 14160326                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/cdi-api-1.0.jar
+7f66246fb000-7f662472b000 r--s 00249000 08:02 14160335                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/guava-25.1-android.jar
+7f662472b000-7f662472e000 ---p 00000000 00:00 0 
+7f662472e000-7f662482c000 rw-p 00000000 00:00 0 
+7f662482c000-7f6624843000 r-xp 00000000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f6624843000-7f6624a42000 ---p 00017000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f6624a42000-7f6624a43000 r--p 00016000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f6624a43000-7f6624a44000 rw-p 00017000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f6624a44000-7f6624a55000 r-xp 00000000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f6624a55000-7f6624c55000 ---p 00011000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f6624c55000-7f6624c56000 r--p 00011000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f6624c56000-7f6624c57000 rw-p 00012000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f6624c57000-7f6624c72000 r--s 001d6000 08:02 6695473                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar
+7f6624c72000-7f6624c8d000 r--s 00394000 08:02 6695468                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar
+7f6624c8d000-7f6624c8e000 ---p 00000000 00:00 0 
+7f6624c8e000-7f6624d8e000 rw-p 00000000 00:00 0 
+7f6624d8e000-7f6624d91000 ---p 00000000 00:00 0 
+7f6624d91000-7f6624e8f000 rw-p 00000000 00:00 0 
+7f6624e8f000-7f6624e90000 ---p 00000000 00:00 0 
+7f6624e90000-7f6624e93000 ---p 00000000 00:00 0 
+7f6624e93000-7f6624f90000 rw-p 00000000 00:00 0 
+7f6624f90000-7f6624f91000 ---p 00000000 00:00 0 
+7f6624f91000-7f6624f94000 ---p 00000000 00:00 0 
+7f6624f94000-7f6625091000 rw-p 00000000 00:00 0 
+7f6625091000-7f6625092000 ---p 00000000 00:00 0 
+7f6625092000-7f6625095000 ---p 00000000 00:00 0 
+7f6625095000-7f6625192000 rw-p 00000000 00:00 0 
+7f6625192000-7f6625193000 ---p 00000000 00:00 0 
+7f6625193000-7f6625196000 ---p 00000000 00:00 0 
+7f6625196000-7f6625293000 rw-p 00000000 00:00 0 
+7f6625293000-7f6625296000 ---p 00000000 00:00 0 
+7f6625296000-7f6625394000 rw-p 00000000 00:00 0 
+7f6625394000-7f6625ea5000 r--p 00000000 08:02 6691447                    /usr/lib/locale/locale-archive
+7f6625ea5000-7f6625ea8000 ---p 00000000 00:00 0 
+7f6625ea8000-7f6625fa6000 rw-p 00000000 00:00 0 
+7f6625fa6000-7f6625fa9000 ---p 00000000 00:00 0 
+7f6625fa9000-7f66260a7000 rw-p 00000000 00:00 0 
+7f66260a7000-7f66260a8000 ---p 00000000 00:00 0 
+7f66260a8000-7f6628000000 rw-p 00000000 00:00 0 
+7f6628000000-7f6628021000 rw-p 00000000 00:00 0 
+7f6628021000-7f662c000000 ---p 00000000 00:00 0 
+7f662c000000-7f662c021000 rw-p 00000000 00:00 0 
+7f662c021000-7f6630000000 ---p 00000000 00:00 0 
+7f6630000000-7f6630021000 rw-p 00000000 00:00 0 
+7f6630021000-7f6634000000 ---p 00000000 00:00 0 
+7f6634000000-7f6634021000 rw-p 00000000 00:00 0 
+7f6634021000-7f6638000000 ---p 00000000 00:00 0 
+7f6638000000-7f6638021000 rw-p 00000000 00:00 0 
+7f6638021000-7f663c000000 ---p 00000000 00:00 0 
+7f663c000000-7f663c021000 rw-p 00000000 00:00 0 
+7f663c021000-7f6640000000 ---p 00000000 00:00 0 
+7f6640000000-7f6640002000 r--s 0000c000 08:02 14160394                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/wagon-provider-api-3.3.2.jar
+7f6640002000-7f6640004000 r--s 00002000 08:02 14160385                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-cipher-1.7.jar
+7f6640004000-7f6640006000 r--s 00006000 08:02 14160327                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/checker-compat-qual-2.0.0.jar
+7f6640006000-7f664000a000 r--s 0003d000 08:02 14160389                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-utils-3.2.0.jar
+7f664000a000-7f6644000000 rw-p 00000000 00:00 0 
+7f6644000000-7f6644021000 rw-p 00000000 00:00 0 
+7f6644021000-7f6648000000 ---p 00000000 00:00 0 
+7f6648000000-7f6648001000 r--s 00000000 08:02 14160355                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/javax.inject-1.jar
+7f6648001000-7f6648352000 rw-p 00000000 00:00 0 
+7f6648352000-7f6648522000 r--s 03c68000 08:02 6695494                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+7f6648522000-7f66488f9000 rw-p 00000000 00:00 0 
+7f66488f9000-7f66488fa000 ---p 00000000 00:00 0 
+7f66488fa000-7f66489fa000 rw-p 00000000 00:00 0 
+7f66489fa000-7f66489fb000 ---p 00000000 00:00 0 
+7f66489fb000-7f6648afb000 rw-p 00000000 00:00 0 
+7f6648afb000-7f6648afc000 ---p 00000000 00:00 0 
+7f6648afc000-7f6648bfc000 rw-p 00000000 00:00 0 
+7f6648bfc000-7f6648bfd000 ---p 00000000 00:00 0 
+7f6648bfd000-7f6648cfd000 rw-p 00000000 00:00 0 
+7f6648cfd000-7f6648cfe000 ---p 00000000 00:00 0 
+7f6648cfe000-7f6648dfe000 rw-p 00000000 00:00 0 
+7f6648dfe000-7f6648dff000 ---p 00000000 00:00 0 
+7f6648dff000-7f6648eff000 rw-p 00000000 00:00 0 
+7f6648eff000-7f6648f00000 ---p 00000000 00:00 0 
+7f6648f00000-7f6649000000 rw-p 00000000 00:00 0 
+7f6649000000-7f6649ed0000 rwxp 00000000 00:00 0 
+7f6649ed0000-7f6658000000 ---p 00000000 00:00 0 
+7f6658000000-7f6659059000 rw-p 00000000 00:00 0 
+7f6659059000-7f665c000000 ---p 00000000 00:00 0 
+7f665c000000-7f665c001000 r--s 0000a000 08:02 14160377                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-settings-3.6.1.jar
+7f665c001000-7f665c004000 r--s 0000c000 08:02 14160361                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-artifact-3.6.1.jar
+7f665c004000-7f665c005000 r--s 00002000 08:02 14160392                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/wagon-file-3.3.2.jar
+7f665c005000-7f665c0bd000 rw-p 00000000 00:00 0 
+7f665c0bd000-7f665c0be000 ---p 00000000 00:00 0 
+7f665c0be000-7f665c1e8000 rw-p 00000000 00:00 0 
+7f665c1e8000-7f665c44e000 ---p 00000000 00:00 0 
+7f665c44e000-7f665c478000 rw-p 00000000 00:00 0 
+7f665c478000-7f665c6dd000 ---p 00000000 00:00 0 
+7f665c6dd000-7f665c768000 rw-p 00000000 00:00 0 
+7f665c768000-7f665c825000 ---p 00000000 00:00 0 
+7f665c825000-7f665c862000 rw-p 00000000 00:00 0 
+7f665c862000-7f665cbe6000 ---p 00000000 00:00 0 
+7f665cbe6000-7f665cbee000 r-xp 00000000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f665cbee000-7f665cded000 ---p 00008000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f665cded000-7f665cdee000 r--p 00007000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f665cdee000-7f665cdef000 rw-p 00008000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f665cdef000-7f665cdfa000 r-xp 00000000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f665cdfa000-7f665cff9000 ---p 0000b000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f665cff9000-7f665cffa000 r--p 0000a000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f665cffa000-7f665cffb000 rw-p 0000b000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f665cffb000-7f665d001000 rw-p 00000000 00:00 0 
+7f665d001000-7f665d018000 r-xp 00000000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f665d018000-7f665d217000 ---p 00017000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f665d217000-7f665d218000 r--p 00016000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f665d218000-7f665d219000 rw-p 00017000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f665d219000-7f665d21b000 rw-p 00000000 00:00 0 
+7f665d21b000-7f665d226000 r-xp 00000000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f665d226000-7f665d425000 ---p 0000b000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f665d425000-7f665d426000 r--p 0000a000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f665d426000-7f665d427000 rw-p 0000b000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f665d427000-7f665d42f000 r-xp 00000000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f665d42f000-7f665d62f000 ---p 00008000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f665d62f000-7f665d630000 r--p 00008000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f665d630000-7f665d631000 rw-p 00009000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f665d631000-7f665d65b000 r-xp 00000000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f665d65b000-7f665d85a000 ---p 0002a000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f665d85a000-7f665d85b000 r--p 00029000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f665d85b000-7f665d85d000 rw-p 0002a000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f665d85d000-7f665d86d000 r-xp 00000000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f665d86d000-7f665da6c000 ---p 00010000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f665da6c000-7f665da6e000 r--p 0000f000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f665da6e000-7f665da6f000 rw-p 00011000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f665da6f000-7f665da76000 r-xp 00000000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f665da76000-7f665dc75000 ---p 00007000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f665dc75000-7f665dc76000 r--p 00006000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f665dc76000-7f665dc77000 rw-p 00007000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f665dc77000-7f665dc8d000 r-xp 00000000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f665dc8d000-7f665de8d000 ---p 00016000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f665de8d000-7f665de8e000 r--p 00016000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f665de8e000-7f665de8f000 rw-p 00017000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f665de8f000-7f665e02c000 r-xp 00000000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f665e02c000-7f665e22b000 ---p 0019d000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f665e22b000-7f665e22c000 r--p 0019c000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f665e22c000-7f665e22d000 rw-p 0019d000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f665e22d000-7f665e3fc000 r-xp 00000000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f665e3fc000-7f665e5fc000 ---p 001cf000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f665e5fc000-7f665e607000 r--p 001cf000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f665e607000-7f665e60a000 rw-p 001da000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f665e60a000-7f665e60d000 rw-p 00000000 00:00 0 
+7f665e60d000-7f665f2b0000 r-xp 00000000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f665f2b0000-7f665f4b0000 ---p 00ca3000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f665f4b0000-7f665f544000 r--p 00ca3000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f665f544000-7f665f56d000 rw-p 00d37000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f665f56d000-7f665f59d000 rw-p 00000000 00:00 0 
+7f665f59d000-7f665f5b7000 r-xp 00000000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f665f5b7000-7f665f7b6000 ---p 0001a000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f665f7b6000-7f665f7b7000 r--p 00019000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f665f7b7000-7f665f7b8000 rw-p 0001a000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f665f7b8000-7f665f7bc000 rw-p 00000000 00:00 0 
+7f665f7bc000-7f665f7bf000 r-xp 00000000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f665f7bf000-7f665f9be000 ---p 00003000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f665f9be000-7f665f9bf000 r--p 00002000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f665f9bf000-7f665f9c0000 rw-p 00003000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f665f9c0000-7f665f9dc000 r-xp 00000000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f665f9dc000-7f665fbdb000 ---p 0001c000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f665fbdb000-7f665fbdc000 r--p 0001b000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f665fbdc000-7f665fbdd000 rw-p 0001c000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f665fbdd000-7f665fdc4000 r-xp 00000000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f665fdc4000-7f665ffc4000 ---p 001e7000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f665ffc4000-7f665ffc8000 r--p 001e7000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f665ffc8000-7f665ffca000 rw-p 001eb000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f665ffca000-7f665ffce000 rw-p 00000000 00:00 0 
+7f665ffce000-7f665ffdc000 r-xp 00000000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f665ffdc000-7f66601db000 ---p 0000e000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f66601db000-7f66601dc000 r--p 0000d000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f66601dc000-7f66601dd000 rw-p 0000e000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f66601dd000-7f6660204000 r-xp 00000000 08:02 11145859                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f6660204000-7f6660208000 r--s 00029000 08:02 14160372                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-impl-1.3.3.jar
+7f6660208000-7f6660209000 r--s 00000000 08:02 14160323                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/animal-sniffer-annotations-1.14.jar
+7f6660209000-7f666020b000 r--s 0001b000 08:02 6950144                    /home/geospark/apps/idea-IU-192.5728.98/lib/idea_rt.jar
+7f666020b000-7f666020d000 r--s 0000b000 08:02 14160316                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar
+7f666020d000-7f6660212000 r--s 0003d000 08:02 6695475                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar
+7f6660212000-7f6660216000 r--s 0003a000 08:02 6695476                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar
+7f6660216000-7f66602e1000 rw-p 00000000 00:00 0 
+7f66602e1000-7f66602e2000 ---p 00000000 00:00 0 
+7f66602e2000-7f66602e5000 ---p 00000000 00:00 0 
+7f66602e5000-7f66603e4000 rw-p 00000000 00:00 0 
+7f66603e4000-7f66603e5000 r--s 0000d000 08:02 6695474                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar
+7f66603e5000-7f66603e7000 r--s 00007000 08:02 7083811                    /usr/share/java/java-atk-wrapper.jar
+7f66603e7000-7f66603e9000 r--s 00001000 08:02 6695469                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar
+7f66603e9000-7f66603ea000 r--s 00010000 08:02 6695477                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar
+7f66603ea000-7f66603ed000 r--s 0000f000 08:02 6695470                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar
+7f66603ed000-7f66603ee000 r--s 0000a000 08:02 6695471                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar
+7f66603ee000-7f66603f8000 r--s 00116000 08:02 6695472                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar
+7f66603f8000-7f6660400000 rw-s 00000000 08:02 14301860                   /tmp/hsperfdata_geospark/27075
+7f6660400000-7f6660401000 rw-p 00000000 00:00 0 
+7f6660401000-7f6660402000 ---p 00000000 00:00 0 
+7f6660402000-7f6660404000 rw-p 00000000 00:00 0 
+7f6660404000-7f6660405000 r--p 00027000 08:02 11145859                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f6660405000-7f6660406000 rw-p 00028000 08:02 11145859                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f6660406000-7f6660407000 rw-p 00000000 00:00 0 
+7ffc02f65000-7ffc02f87000 rw-p 00000000 00:00 0                          [stack]
+7ffc02fa3000-7ffc02fa6000 r--p 00000000 00:00 0                          [vvar]
+7ffc02fa6000-7ffc02fa8000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Dmaven.multiModuleProjectDirectory=/home/geospark/IdeaProjects/sparksimpletest -Dmaven.home=/home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3 -Dclassworlds.conf=/home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/bin/m2.conf -Dmaven.ext.class.path=/home/geospark/apps/intellij/plugins/maven/lib/maven-event-listener.jar -Didea.launcher.port=45881 -Didea.launcher.bin.path=/home/geospark/apps/intellij/bin -Dfile.encoding=UTF-8 
+java_command: com.intellij.rt.execution.application.AppMainV2 org.codehaus.classworlds.Launcher -Didea.version2019.2 package
+java_class_path (initial): /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar:/home/geospark/apps/idea-IU-192.5728.98/lib/idea_rt.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+PATH=/home/hansub/google-cloud-sdk/bin:/home/geospark/apps/spark/bin:/home/geospark/apps/spark/sbin:/home/geospark/apps/scala-2.11.12/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/local/geospark_hadoop/bin:/usr/local/geospark_hadoop/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/home/geospark/apps/zeppelin/bin
+USERNAME=geospark
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xabc3b0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xabc3b0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x8f0a60], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x8f10d0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x8f10d0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x8f10d0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x8f10d0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=18.04
+DISTRIB_CODENAME=bionic
+DISTRIB_DESCRIPTION="Ubuntu 18.04.3 LTS"
+
+uname:Linux 4.15.0-76-generic #86-Ubuntu SMP Fri Jan 17 17:24:28 UTC 2020 x86_64
+libc:glibc 2.27 NPTL 2.27 
+rlimit: STACK 8192k, CORE 0k, NPROC 30340, NOFILE 1048576, AS infinity
+load average:2.56 1.20 0.52
+
+/proc/meminfo:
+MemTotal:        8045424 kB
+MemFree:          124424 kB
+MemAvailable:      44724 kB
+Buffers:            4756 kB
+Cached:           322992 kB
+SwapCached:         2672 kB
+Active:          6288384 kB
+Inactive:        1117780 kB
+Active(anon):    6266460 kB
+Inactive(anon):  1099080 kB
+Active(file):      21924 kB
+Inactive(file):    18700 kB
+Unevictable:          16 kB
+Mlocked:              16 kB
+SwapTotal:       2097148 kB
+SwapFree:              8 kB
+Dirty:               136 kB
+Writeback:             0 kB
+AnonPages:       7077372 kB
+Mapped:           374356 kB
+Shmem:            286184 kB
+Slab:             243976 kB
+SReclaimable:      74788 kB
+SUnreclaim:       169188 kB
+KernelStack:       32192 kB
+PageTables:        88500 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6119860 kB
+Committed_AS:   18331484 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      464296 kB
+DirectMap2M:     7802880 kB
+DirectMap1G:     1048576 kB
+
+container (cgroup) information:
+container_type: cgroupv1
+cpu_cpuset_cpus: 0-7
+cpu_memory_nodes: 0
+active_processor_count: 8
+cpu_quota: -1
+cpu_period: 100000
+cpu_shares: -1
+memory_limit_in_bytes: -1
+memory_and_swap_limit_in_bytes: -2
+memory_soft_limit_in_bytes: -1
+memory_usage_in_bytes: 7262998528
+memory_max_usage_in_bytes: 7394152448
+
+
+CPU:total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 158 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4038.430
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 0
+cpu cores	: 4
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4080.372
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 1
+cpu cores	: 4
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4014.419
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 2
+cpu cores	: 4
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4017.275
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 3
+cpu cores	: 4
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 4
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4077.378
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 0
+cpu cores	: 4
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 5
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4057.482
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 1
+cpu cores	: 4
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 6
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4063.481
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 2
+cpu cores	: 4
+apicid		: 5
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 7
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+stepping	: 9
+microcode	: 0xca
+cpu MHz		: 4009.990
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 3
+cpu cores	: 4
+apicid		: 7
+initial apicid	: 7
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 8045424k(139956k free), swap 2097148k(0k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.242-b08) for linux-amd64 JRE (1.8.0_242-8u242-b08-0ubuntu3~18.04-b08), built on Jan 17 2020 23:41:21 by "buildd" with gcc 7.4.0
+
+time: Wed Feb  5 13:37:00 2020
+timezone: KST
+elapsed time: 4 seconds (0d 0h 0m 4s)
+
