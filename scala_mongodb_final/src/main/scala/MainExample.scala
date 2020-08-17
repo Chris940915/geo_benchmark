@@ -1,10 +1,8 @@
 
 import com.mongodb.spark._
-import com.vividsolutions.jts.geom.{Coordinate, GeometryFactory, Envelope}
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.serializer.KryoSerializer
 import org.apache.spark.sql.SparkSession
-import org.datasyslab.geospark.enums.GridType
 import org.datasyslab.geospark.serde.GeoSparkKryoRegistrator
 import org.datasyslab.geosparksql.utils.GeoSparkSQLRegistrator
 object MainExample extends App {
@@ -16,12 +14,13 @@ object MainExample extends App {
   val mongoUri = "mongodb://127.0.0.1:27017/test.test_2"
 
   val sparkSession = SparkSession.builder()
-    .master("local[*]")
+    .master("yarn")
     .appName("Geospark_mongodb")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
+    .config("geospark.global.index", "true")
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
@@ -39,17 +38,25 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 5
   spatialDf.show()
 
-  val geometryFactory = new GeometryFactory()
-  val kNNQueryPoint = geometryFactory.createPoint(new Coordinate(-84.01, 34.01))
-  val rangeQueryWindow = new Envelope(-90.01, -80.01, 30.01, 40.01)
-  val joinQueryPartitioningType = GridType.QUADTREE
-  val eachQueryLoopTimes = 5
+  val loopTimes = 10
 
-  println("Hello, world!")
+  // Cricle
+  elapsedTime(Spatial_CircleRangeQuery(1))
+  elapsedTime(Spatial_CircleRangeQuery(loopTimes))
 
+  // Box Range
+  //elapsedTime(Spatial_BoxRangeQuery(1))
+  //elapsedTime(Spatial_BoxRangeQuery(loopTimes))
+
+  // knn
+  //elapsedTime(Spatial_KnnQuery(1))
+  //elapsedTime(Spatial_KnnQuery(loopTimes))
+
+  // Distance Join
+  //elapsedTime(Spatial_DistanceJoin(1))
+  //elapsedTime(Spatial_DistanceJoin(loopTimes))
 
   def elapsedTime[R](block: => R): R = {
     val s = System.currentTimeMillis
@@ -59,9 +66,9 @@ object MainExample extends App {
     result
   }
 
-
-  def Spatial_BoxRangeQuery(){
-    for(i <- 1 to loopTimes){
+  // 2, 20, 200, 2000
+  def Spatial_BoxRangeQuery(x: Int) = {
+    for(i <- 1 to x){
       spatialDf = sparkSession.sql(
         """
           |SELECT *
@@ -74,8 +81,9 @@ object MainExample extends App {
     }
   }
 
-  def Spatial_CircleRangeQuery() {
-    for(i <- 1 to loopTimes) {
+  // 1, 10, 100, 1000
+  def Spatial_CircleRangeQuery(x: Int): Unit = {
+    for(i <- 1 to x) {
       spatialDf = sparkSession.sql(
         """
           |SELECT *
@@ -89,8 +97,9 @@ object MainExample extends App {
     }
   }
 
-  def Spatial_KnnQuery() {
-    for(i <- 1 to loopTimes){
+  // 1, 10, 100, 1000
+  def Spatial_KnnQuery(x: Int):Unit = {
+    for(i <- 1 to x){
       spatialDf = sparkSession.sql(
         """
           |SELECT checkin, ST_Distance(ST_Point(1.0,100.0), checkin) AS distance
@@ -103,8 +112,9 @@ object MainExample extends App {
     }
   }
 
-  def Spatial_DistanceJoin(){
-    for(i <- 1 to loopTimes) {
+  // 1, 10, 100, 1000
+  def Spatial_DistanceJoin(x: Int):Unit ={
+    for(i <- 1 to x) {
       spatialDf = sparkSession.sql(
         """
           | SELECT *

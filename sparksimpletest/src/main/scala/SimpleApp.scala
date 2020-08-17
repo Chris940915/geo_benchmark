@@ -15,18 +15,19 @@ object SimpleApp extends App{
   Logger.getLogger("akka").setLevel(Level.WARN)
 
   var sparkSession = SparkSession.builder()
-    .master("local[*]") // Delete this if run in cluster mode
-    .appName("readTestScala") // Change this to a proper name
+    .master("yarn") // Delete this if run in cluster mode
+    .appName("hdfs_geospark") // Change this to a proper name
     // Enable GeoSpark custom Kryo serializer
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
+    .config("geospark.global.index", "true")
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
   val resourceFolder = "hdfs://localhost:54311/geospark/test/"
 
   var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"streets.csv")
-  rawDf.createOrReplaceTempView("rawdf")
+  rawDf.createOrReplaceTempView("rawDf")
   print(rawDf.printSchema())
 
   //Create a Geometry type column in GeoSparkSQL
@@ -42,8 +43,8 @@ object SimpleApp extends App{
       |FROM rawDf
     """.stripMargin)
 
-  spatialDf.createOrReplaceTempView("spatialdf")
-  spatialDf_2.createOrReplaceTempView("spatialdf_2")
+  spatialDf.createOrReplaceTempView("spatialDf")
+  spatialDf_2.createOrReplaceTempView("spatialDf_2")
 
   spatialDf.show()
   spatialDf.printSchema()
@@ -57,26 +58,26 @@ object SimpleApp extends App{
   var spatialRDD = new SpatialRDD[Geometry]
   spatialRDD.rawSpatialRDD = Adapter.toRdd(spatialDf)
 
+  val loopTimes = 10
 
-//  spatialDf = sparkSession.sql(
-//    """
-//      |SELECT *
-//      |FROM spatialdf
-//      |WHERE ST_Intersects (ST_PolygonFromEnvelope(-120.0,33.0, 0.0,35.0), checkin)
-//  """.stripMargin)
-//  spatialDf.createOrReplaceTempView("spatialdf")
-//  spatialDf.show()
+  // Cricle
+  elapsedTime(Spatial_CircleRangeQuery(1))
+  elapsedTime(Spatial_CircleRangeQuery(loopTimes))
 
-  val loopTimes = 5
+  // Box Range
+  //elapsedTime(Spatial_BoxRangeQuery(1))
+  //elapsedTime(Spatial_BoxRangeQuery(loopTimes))
 
-  //--------------- method ---------------
-  //elapsedTime(Spatial_KnnQuery())
-  //elapsedTime(Spatial_BoxRangeQuery())
-  elapsedTime(Spatial_CircleRangeQuery())
-  //elapsedTime(Spatial_DistanceJoin())
+  // knn
+  //elapsedTime(Spatial_KnnQuery(1))
+  //elapsedTime(Spatial_KnnQuery(loopTimes))
+
+  // Distance Join
+  //elapsedTime(Spatial_DistanceJoin(1))
+  //elapsedTime(Spatial_DistanceJoin(loopTimes))
+
   sparkSession.stop()
   System.out.println("All GeoSpark DEMOs passed!")
-
 
   def elapsedTime[R](block: => R): R = {
     val s = System.currentTimeMillis
@@ -86,27 +87,28 @@ object SimpleApp extends App{
     result
   }
 
-  def Spatial_BoxRangeQuery(){
-    for(i <- 1 to loopTimes){
+  // BoX 2, 20, 200, 2000
+  def Spatial_BoxRangeQuery(x: Int): Unit = {
+    for(i <- 1 to x){
       spatialDf = sparkSession.sql(
         """
           |SELECT *
-          |FROM spatialdf
+          |FROM spatialDf
           |WHERE ST_Contains (ST_PolygonFromEnvelope(-180.0,0.0,0.0,136.0), checkin)
-          |LIMIT 5
         """.stripMargin)
       spatialDf.createOrReplaceTempView("box_df")
       spatialDf.show()
     }
   }
 
-  def Spatial_CircleRangeQuery() {
-    for(i <- 1 to loopTimes) {
+  // distance : 1, 10, 100, 1000
+  def Spatial_CircleRangeQuery(x: Int): Unit = {
+    for(i <- 1 to x) {
       spatialDf = sparkSession.sql(
         """
           |SELECT *
-          |FROM spatialdf
-          |WHERE ST_Distance(ST_Point(1.0,100.0), checkin) < 50
+          |FROM spatialDf
+          |WHERE ST_Distance(ST_Point(-118.0, 62.0), spatialDf.checkin) < 20
         """.stripMargin)
       spatialDf.createOrReplaceTempView("circle_df")
       spatialDf.show()
@@ -114,228 +116,35 @@ object SimpleApp extends App{
       println(spatialDf.count())
     }
   }
-  // C_NN.
-  def Spatial_CNNQuery() {
-    for(i <- 1 to loopTimes) {
+
+  // k :1, 10, 100, 1000
+  def Spatial_KnnQuery(x: Int): Unit = {
+    for(i <- 1 to x){
       spatialDf = sparkSession.sql(
         """
-          |SELECT *, ST_Distance(ST_Point(1.0,100.0), checkin) AS distance
-          |FROM spatialdf
+          |SELECT checkin, ST_Distance(ST_Point(1.0,100.0), checkin) AS distance
+          |FROM spatialDf
           |ORDER BY distance DESC
-          |WHERE distance < 100
-          |LIMIT 5
+          |LIMIT 100
         """.stripMargin)
-      spatialDf.createOrReplaceTempView("cnn_df")
+      spatialDf.createOrReplaceTempView("knn_df")
       spatialDf.show()
     }
   }
 
-  8
-
-
-
-  /**
-   * Test spatial range query.
-   *
-   * @throws Exception the exception
-   */
-//  def testSpatialRangeQuery() {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    objectRDD.rawSpatialRDD.persist(StorageLevel.MEMORY_ONLY)
-//    for(i < loopTimes)
-//    {
-//      val resultSize = RangeQuery.SpatialRangeQuery(objectRDD, rangeQueryWindow, false,false).count
-//    }
-//  }
-
-
-
-  /**
-   * Test spatial range query using index.
-   *
-   * @throws Exception the exception
-   */
-//  def testSpatialRangeQueryUsingIndex() {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    objectRDD.buildIndex(PointRDDIndexType,false)
-//    objectRDD.indexedRawRDD.persist(StorageLevel.MEMORY_ONLY)
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val resultSize = RangeQuery.SpatialRangeQuery(objectRDD, rangeQueryWindow, false,true).count
-//    }
-//
-//  }
-
-  /**
-   * Test spatial knn query.
-   *
-   * @throws Exception the exception
-   */
-//  def testSpatialKnnQuery() {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    objectRDD.rawSpatialRDD.persist(StorageLevel.MEMORY_ONLY)
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val result = KNNQuery.SpatialKnnQuery(objectRDD, kNNQueryPoint, 1000,false)
-//    }
-//  }
-
-  /**
-   * Test spatial knn query using index.
-   *
-   * @throws Exception the exception
-   */
-//  def testSpatialKnnQueryUsingIndex() {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    objectRDD.buildIndex(PointRDDIndexType,false)
-//    objectRDD.indexedRawRDD.persist(StorageLevel.MEMORY_ONLY)
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val result = KNNQuery.SpatialKnnQuery(objectRDD, kNNQueryPoint, 1000, true)
-//    }
-//  }
-
-  /**
-   * Test spatial join query.
-   *
-   * @throws Exception the exception
-   */
-//  def testSpatialJoinQuery() {
-//    val queryWindowRDD = new PolygonRDD(sc, PolygonRDDInputLocation, PolygonRDDStartOffset, PolygonRDDEndOffset, PolygonRDDSplitter, true)
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//
-//    objectRDD.spatialPartitioning(joinQueryPartitioningType)
-//    queryWindowRDD.spatialPartitioning(objectRDD.getPartitioner)
-//
-//    objectRDD.spatialPartitionedRDD.persist(StorageLevel.MEMORY_ONLY)
-//    queryWindowRDD.spatialPartitionedRDD.persist(StorageLevel.MEMORY_ONLY)
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val resultSize = JoinQuery.SpatialJoinQuery(objectRDD,queryWindowRDD,false,true).count
-//    }
-//  }
-
-  /**
-   * Test spatial join query using index.
-   *
-   * @throws Exception the exception
-   */
-//  def testSpatialJoinQueryUsingIndex() {
-//    val queryWindowRDD = new PolygonRDD(sc, PolygonRDDInputLocation, PolygonRDDStartOffset, PolygonRDDEndOffset, PolygonRDDSplitter, true)
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//
-//    objectRDD.spatialPartitioning(joinQueryPartitioningType)
-//    queryWindowRDD.spatialPartitioning(objectRDD.getPartitioner)
-//
-//    objectRDD.buildIndex(PointRDDIndexType,true)
-//
-//    objectRDD.indexedRDD.persist(StorageLevel.MEMORY_ONLY)
-//    queryWindowRDD.spatialPartitionedRDD.persist(StorageLevel.MEMORY_ONLY)
-//
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val resultSize = JoinQuery.SpatialJoinQuery(objectRDD,queryWindowRDD,true,false).count()
-//    }
-//  }
-
-  /**
-   * Test spatial join query.
-   *
-   * @throws Exception the exception
-   */
-//  def testDistanceJoinQuery() {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    val queryWindowRDD = new CircleRDD(objectRDD,0.1)
-//
-//    objectRDD.spatialPartitioning(GridType.QUADTREE)
-//    queryWindowRDD.spatialPartitioning(objectRDD.getPartitioner)
-//
-//    objectRDD.spatialPartitionedRDD.persist(StorageLevel.MEMORY_ONLY)
-//    queryWindowRDD.spatialPartitionedRDD.persist(StorageLevel.MEMORY_ONLY)
-//
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val resultSize = JoinQuery.DistanceJoinQuery(objectRDD,queryWindowRDD,false,true).count()
-//    }
-//  }
-
-  /**
-   * Test spatial join query using index.
-   *
-   * @throws Exception the exception
-   */
-//  def testDistanceJoinQueryUsingIndex() {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    val queryWindowRDD = new CircleRDD(objectRDD,0.1)
-//
-//    objectRDD.spatialPartitioning(GridType.QUADTREE)
-//    queryWindowRDD.spatialPartitioning(objectRDD.getPartitioner)
-//
-//    objectRDD.buildIndex(IndexType.RTREE,true)
-//
-//    objectRDD.indexedRDD.persist(StorageLevel.MEMORY_ONLY)
-//    queryWindowRDD.spatialPartitionedRDD.persist(StorageLevel.MEMORY_ONLY)
-//
-//    for(i <- 1 to eachQueryLoopTimes)
-//    {
-//      val resultSize = JoinQuery.DistanceJoinQuery(objectRDD,queryWindowRDD,true,true).count
-//    }
-//  }
-//
-//  @throws[Exception]
-//  def testCRSTransformationSpatialRangeQuery(): Unit = {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY, "epsg:4326", "epsg:3005")
-//    objectRDD.rawSpatialRDD.persist(StorageLevel.MEMORY_ONLY)
-//    var i = 0
-//    while ( {
-//      i < eachQueryLoopTimes
-//    }) {
-//      val resultSize = RangeQuery.SpatialRangeQuery(objectRDD, rangeQueryWindow, false, false).count
-//      assert(resultSize > -1)
-//
-//      {
-//        i += 1; i - 1
-//      }
-//    }
-//  }
-//
-//
-//  @throws[Exception]
-//  def testCRSTransformationSpatialRangeQueryUsingIndex(): Unit = {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY, "epsg:4326", "epsg:3005")
-//    objectRDD.buildIndex(PointRDDIndexType, false)
-//    objectRDD.indexedRawRDD.persist(StorageLevel.MEMORY_ONLY)
-//    var i = 0
-//    while ( {
-//      i < eachQueryLoopTimes
-//    }) {
-//      val resultSize = RangeQuery.SpatialRangeQuery(objectRDD, rangeQueryWindow, false, true).count
-//      assert(resultSize > -1)
-//
-//      {
-//        i += 1; i - 1
-//      }
-//    }
-//  }
-//
-//  def testCRSTransformation():Unit =
-//  {
-//    val objectRDD = new PointRDD(sc, PointRDDInputLocation, PointRDDOffset, PointRDDSplitter, true, StorageLevel.MEMORY_ONLY)
-//    // Run Coordinate Reference Systems Transformation on the original data
-//    objectRDD.CRSTransform("epsg:4326","epsg:3005")
-//    objectRDD.rawSpatialRDD.count()
-//  }
-//
-//  @throws[Exception]
-//  def testLoadShapefileIntoPolygonRDD(): Unit = {
-//    val spatialRDD = ShapefileReader.readToPolygonRDD(sc, ShapeFileInputLocation)
-//    try
-//      RangeQuery.SpatialRangeQuery(spatialRDD, new Envelope(-180, 180, -90, 90), false, false).count
-//    catch {
-//      case e: Exception =>
-//        // TODO Auto-generated catch block
-//        e.printStackTrace()
-//    }
-//  }
+  // distance : 1, 10, 100, 1000
+  def Spatial_DistanceJoin(x: Int): Unit = {
+    for(i <- 1 to x) {
+      spatialDf = sparkSession.sql(
+        """
+          | SELECT *
+          | FROM spatialDf, spatialDf_2
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 2
+      """.stripMargin
+      )
+      spatialDf.createOrReplaceGlobalTempView("djoin_df")
+      spatialDf.show()
+    }
+  }
 
 }
