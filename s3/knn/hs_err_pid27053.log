@@ -1,0 +1,790 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 182976512 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2757), pid=27053, tid=0x00007f903acec700
+#
+# JRE version: OpenJDK Runtime Environment (8.0_242-b08) (build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08)
+# Java VM: OpenJDK 64-Bit Server VM (25.242-b08 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f9058081800):  VMThread [stack: 0x00007f903abed000,0x00007f903aced000] [id=27063]
+
+Stack: [0x00007f903abed000,0x00007f903aced000],  sp=0x00007f903aceb470,  free space=1017k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xabba52]
+V  [libjvm.so+0x4de2e7]
+V  [libjvm.so+0x8f59f0]
+V  [libjvm.so+0x8ecabe]
+V  [libjvm.so+0x970456]
+V  [libjvm.so+0x9717c8]
+V  [libjvm.so+0x96ddc6]
+V  [libjvm.so+0x96e15c]
+V  [libjvm.so+0x91cc28]
+V  [libjvm.so+0xabd792]
+V  [libjvm.so+0xac2336]
+V  [libjvm.so+0xac0635]
+V  [libjvm.so+0xac0f0d]
+V  [libjvm.so+0xac1318]
+V  [libjvm.so+0x8f2d82]
+
+VM_Operation (0x00007f9060faecd0): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f905800c000
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f8fc8078000 JavaThread "process reaper" daemon [_thread_blocked, id=27123, stack(0x00007f9038011000,0x00007f903804a000)]
+  0x00007f8fc8001000 JavaThread "scala-execution-context-global-25" daemon [_thread_blocked, id=27121, stack(0x00007f902b7f8000,0x00007f902b8f9000)]
+  0x00007f8fd0003000 JavaThread "scala-execution-context-global-26" daemon [_thread_blocked, id=27120, stack(0x00007f902b8f9000,0x00007f902b9fa000)]
+  0x00007f8fcc005800 JavaThread "scala-execution-context-global-23" daemon [_thread_blocked, id=27118, stack(0x00007f902bafb000,0x00007f902bbfc000)]
+  0x00007f905922e000 JavaThread "resolver-5" daemon [_thread_blocked, id=27108, stack(0x00007f9030afa000,0x00007f9030bfb000)]
+  0x00007f905922c000 JavaThread "resolver-4" daemon [_thread_blocked, id=27107, stack(0x00007f9030bfb000,0x00007f9030cfc000)]
+  0x00007f905922a800 JavaThread "resolver-3" daemon [_thread_blocked, id=27106, stack(0x00007f9030cfc000,0x00007f9030dfd000)]
+  0x00007f9059229800 JavaThread "resolver-2" daemon [_thread_blocked, id=27105, stack(0x00007f9030dfd000,0x00007f9030efe000)]
+  0x00007f9059229000 JavaThread "resolver-1" daemon [_thread_blocked, id=27104, stack(0x00007f9030efe000,0x00007f9030fff000)]
+  0x00007f9004001000 JavaThread "Attach Listener" daemon [_thread_blocked, id=27100, stack(0x00007f90386fa000,0x00007f90387fb000)]
+  0x00007f9058182800 JavaThread "Monitor Ctrl-Break" daemon [_thread_in_native, id=27073, stack(0x00007f90392a6000,0x00007f90393a7000)]
+  0x00007f90580dd800 JavaThread "Service Thread" daemon [_thread_blocked, id=27071, stack(0x00007f90398d3000,0x00007f90399d4000)]
+  0x00007f90580c8800 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=27070, stack(0x00007f90399d5000,0x00007f9039ad5000)]
+  0x00007f90580c6800 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=27069, stack(0x00007f9039ad6000,0x00007f9039bd6000)]
+  0x00007f90580c4800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=27068, stack(0x00007f9039bd7000,0x00007f9039cd7000)]
+  0x00007f90580c1800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=27067, stack(0x00007f9039cd8000,0x00007f9039dd8000)]
+  0x00007f90580bd800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=27066, stack(0x00007f9039dd8000,0x00007f9039ed9000)]
+  0x00007f9058090000 JavaThread "Finalizer" daemon [_thread_blocked, id=27065, stack(0x00007f903a9ea000,0x00007f903aaeb000)]
+  0x00007f905808b800 JavaThread "Reference Handler" daemon [_thread_blocked, id=27064, stack(0x00007f903aaeb000,0x00007f903abec000)]
+  0x00007f905800c000 JavaThread "main" [_thread_blocked, id=27054, stack(0x00007f9060eb2000,0x00007f9060fb2000)]
+
+Other Threads:
+=>0x00007f9058081800 VMThread [stack: 0x00007f903abed000,0x00007f903aced000] [id=27063]
+  0x00007f90580e0000 WatcherThread [stack: 0x00007f90397d3000,0x00007f90398d3000] [id=27072]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f9058008480] Threads_lock - owner thread: 0x00007f9058081800
+[0x00007f9058008980] Heap_lock - owner thread: 0x00007f905800c000
+
+heap address: 0x0000000085200000, size: 1966 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ PSYoungGen      total 346624K, used 25071K [0x00000000d7100000, 0x00000000edc00000, 0x0000000100000000)
+  eden space 321536K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000eab00000)
+  from space 25088K, 99% used [0x00000000eab00000,0x00000000ec37bef8,0x00000000ec380000)
+  to   space 16896K, 0% used [0x00000000ec400000,0x00000000ec400000,0x00000000ed480000)
+ ParOldGen       total 166912K, used 166598K [0x0000000085200000, 0x000000008f500000, 0x00000000d7100000)
+  object space 166912K, 99% used [0x0000000085200000,0x000000008f4b1a10,0x000000008f500000)
+ Metaspace       used 37776K, capacity 40450K, committed 40792K, reserved 1085440K
+  class space    used 4835K, capacity 5129K, committed 5248K, reserved 1048576K
+
+Card table byte_map: [0x00007f905d01e000,0x00007f905d3f6000] byte_map_base: 0x00007f905cbf5000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f90601503e0
+ Begin Bits: [0x00007f9040290000, 0x00007f9042148000)
+ End Bits:   [0x00007f9042148000, 0x00007f9044000000)
+
+Polling page: 0x00007f9060fd1000
+
+CodeCache: size=245760Kb used=17689Kb max_used=17863Kb free=228070Kb
+ bounds [0x00007f9049000000, 0x00007f904a1a0000, 0x00007f9058000000]
+ total_blobs=5444 nmethods=4990 adapters=367
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 37.794 Thread 0x00007f90580c8800 5890       3       java.util.WeakHashMap$HashIterator::hasNext (95 bytes)
+Event: 37.798 Thread 0x00007f90580c8800 nmethod 5890 0x00007f9049ef1110 code [0x00007f9049ef12a0, 0x00007f9049ef1750]
+Event: 37.798 Thread 0x00007f90580c8800 5891       3       java.util.WeakHashMap$EntryIterator::next (5 bytes)
+Event: 37.799 Thread 0x00007f90580c8800 nmethod 5891 0x00007f904a145f90 code [0x00007f904a146100, 0x00007f904a146368]
+Event: 37.799 Thread 0x00007f90580c8800 5894       3       java.util.WeakHashMap$Entry::getKey (8 bytes)
+Event: 37.799 Thread 0x00007f90580c8800 nmethod 5894 0x00007f90493ad410 code [0x00007f90493ad580, 0x00007f90493ad830]
+Event: 37.799 Thread 0x00007f90580c8800 5893       3       java.util.WeakHashMap$HashIterator::nextEntry (81 bytes)
+Event: 37.800 Thread 0x00007f90580c8800 nmethod 5893 0x00007f90491d1f90 code [0x00007f90491d2140, 0x00007f90491d25c8]
+Event: 37.800 Thread 0x00007f90580c8800 5892       3       java.util.WeakHashMap$EntryIterator::next (5 bytes)
+Event: 37.800 Thread 0x00007f90580c8800 nmethod 5892 0x00007f90491d1ad0 code [0x00007f90491d1c40, 0x00007f90491d1e48]
+
+GC Heap History (10 events):
+Event: 4.389 GC heap after
+Heap after GC invocations=8 (full 0):
+ PSYoungGen      total 262656K, used 13302K [0x00000000d7100000, 0x00000000e8900000, 0x0000000100000000)
+  eden space 249344K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6480000)
+  from space 13312K, 99% used [0x00000000e7500000,0x00000000e81fd830,0x00000000e8200000)
+  to   space 16896K, 0% used [0x00000000e6480000,0x00000000e6480000,0x00000000e7500000)
+ ParOldGen       total 84992K, used 15447K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 18% used [0x0000000085200000,0x0000000086115ef8,0x000000008a500000)
+ Metaspace       used 20625K, capacity 21124K, committed 21248K, reserved 1069056K
+  class space    used 2355K, capacity 2509K, committed 2560K, reserved 1048576K
+}
+Event: 4.389 GC heap before
+{Heap before GC invocations=9 (full 1):
+ PSYoungGen      total 262656K, used 13302K [0x00000000d7100000, 0x00000000e8900000, 0x0000000100000000)
+  eden space 249344K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6480000)
+  from space 13312K, 99% used [0x00000000e7500000,0x00000000e81fd830,0x00000000e8200000)
+  to   space 16896K, 0% used [0x00000000e6480000,0x00000000e6480000,0x00000000e7500000)
+ ParOldGen       total 84992K, used 15447K [0x0000000085200000, 0x000000008a500000, 0x00000000d7100000)
+  object space 84992K, 18% used [0x0000000085200000,0x0000000086115ef8,0x000000008a500000)
+ Metaspace       used 20625K, capacity 21124K, committed 21248K, reserved 1069056K
+  class space    used 2355K, capacity 2509K, committed 2560K, reserved 1048576K
+Event: 4.483 GC heap after
+Heap after GC invocations=9 (full 1):
+ PSYoungGen      total 262656K, used 0K [0x00000000d7100000, 0x00000000e8900000, 0x0000000100000000)
+  eden space 249344K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6480000)
+  from space 13312K, 0% used [0x00000000e7500000,0x00000000e7500000,0x00000000e8200000)
+  to   space 16896K, 0% used [0x00000000e6480000,0x00000000e6480000,0x00000000e7500000)
+ ParOldGen       total 74240K, used 23636K [0x0000000085200000, 0x0000000089a80000, 0x00000000d7100000)
+  object space 74240K, 31% used [0x0000000085200000,0x0000000086915070,0x0000000089a80000)
+ Metaspace       used 20625K, capacity 21124K, committed 21248K, reserved 1069056K
+  class space    used 2355K, capacity 2509K, committed 2560K, reserved 1048576K
+}
+Event: 6.378 GC heap before
+{Heap before GC invocations=10 (full 1):
+ PSYoungGen      total 262656K, used 73843K [0x00000000d7100000, 0x00000000e8900000, 0x0000000100000000)
+  eden space 249344K, 29% used [0x00000000d7100000,0x00000000db91cf98,0x00000000e6480000)
+  from space 13312K, 0% used [0x00000000e7500000,0x00000000e7500000,0x00000000e8200000)
+  to   space 16896K, 0% used [0x00000000e6480000,0x00000000e6480000,0x00000000e7500000)
+ ParOldGen       total 74240K, used 23636K [0x0000000085200000, 0x0000000089a80000, 0x00000000d7100000)
+  object space 74240K, 31% used [0x0000000085200000,0x0000000086915070,0x0000000089a80000)
+ Metaspace       used 33625K, capacity 35364K, committed 35416K, reserved 1081344K
+  class space    used 4174K, capacity 4430K, committed 4480K, reserved 1048576K
+Event: 6.387 GC heap after
+Heap after GC invocations=10 (full 1):
+ PSYoungGen      total 266240K, used 10855K [0x00000000d7100000, 0x00000000ed480000, 0x0000000100000000)
+  eden space 249344K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6480000)
+  from space 16896K, 64% used [0x00000000e6480000,0x00000000e6f19f28,0x00000000e7500000)
+  to   space 16896K, 0% used [0x00000000ec400000,0x00000000ec400000,0x00000000ed480000)
+ ParOldGen       total 74240K, used 23644K [0x0000000085200000, 0x0000000089a80000, 0x00000000d7100000)
+  object space 74240K, 31% used [0x0000000085200000,0x0000000086917070,0x0000000089a80000)
+ Metaspace       used 33625K, capacity 35364K, committed 35416K, reserved 1081344K
+  class space    used 4174K, capacity 4430K, committed 4480K, reserved 1048576K
+}
+Event: 6.387 GC heap before
+{Heap before GC invocations=11 (full 2):
+ PSYoungGen      total 266240K, used 10855K [0x00000000d7100000, 0x00000000ed480000, 0x0000000100000000)
+  eden space 249344K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6480000)
+  from space 16896K, 64% used [0x00000000e6480000,0x00000000e6f19f28,0x00000000e7500000)
+  to   space 16896K, 0% used [0x00000000ec400000,0x00000000ec400000,0x00000000ed480000)
+ ParOldGen       total 74240K, used 23644K [0x0000000085200000, 0x0000000089a80000, 0x00000000d7100000)
+  object space 74240K, 31% used [0x0000000085200000,0x0000000086917070,0x0000000089a80000)
+ Metaspace       used 33625K, capacity 35364K, committed 35416K, reserved 1081344K
+  class space    used 4174K, capacity 4430K, committed 4480K, reserved 1048576K
+Event: 6.447 GC heap after
+Heap after GC invocations=11 (full 2):
+ PSYoungGen      total 266240K, used 0K [0x00000000d7100000, 0x00000000ed480000, 0x0000000100000000)
+  eden space 249344K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000e6480000)
+  from space 16896K, 0% used [0x00000000e6480000,0x00000000e6480000,0x00000000e7500000)
+  to   space 16896K, 0% used [0x00000000ec400000,0x00000000ec400000,0x00000000ed480000)
+ ParOldGen       total 104448K, used 30161K [0x0000000085200000, 0x000000008b800000, 0x00000000d7100000)
+  object space 104448K, 28% used [0x0000000085200000,0x0000000086f744d8,0x000000008b800000)
+ Metaspace       used 33546K, capacity 35172K, committed 35416K, reserved 1081344K
+  class space    used 4150K, capacity 4398K, committed 4480K, reserved 1048576K
+}
+Event: 7.802 GC heap before
+{Heap before GC invocations=12 (full 2):
+ PSYoungGen      total 266240K, used 249344K [0x00000000d7100000, 0x00000000ed480000, 0x0000000100000000)
+  eden space 249344K, 100% used [0x00000000d7100000,0x00000000e6480000,0x00000000e6480000)
+  from space 16896K, 0% used [0x00000000e6480000,0x00000000e6480000,0x00000000e7500000)
+  to   space 16896K, 0% used [0x00000000ec400000,0x00000000ec400000,0x00000000ed480000)
+ ParOldGen       total 104448K, used 30161K [0x0000000085200000, 0x000000008b800000, 0x00000000d7100000)
+  object space 104448K, 28% used [0x0000000085200000,0x0000000086f744d8,0x000000008b800000)
+ Metaspace       used 37754K, capacity 40386K, committed 40536K, reserved 1085440K
+  class space    used 4832K, capacity 5129K, committed 5248K, reserved 1048576K
+Event: 7.835 GC heap after
+Heap after GC invocations=12 (full 2):
+ PSYoungGen      total 338432K, used 16880K [0x00000000d7100000, 0x00000000edc00000, 0x0000000100000000)
+  eden space 321536K, 0% used [0x00000000d7100000,0x00000000d7100000,0x00000000eab00000)
+  from space 16896K, 99% used [0x00000000ec400000,0x00000000ed47c020,0x00000000ed480000)
+  to   space 25088K, 0% used [0x00000000eab00000,0x00000000eab00000,0x00000000ec380000)
+ ParOldGen       total 104448K, used 47390K [0x0000000085200000, 0x000000008b800000, 0x00000000d7100000)
+  object space 104448K, 45% used [0x0000000085200000,0x0000000088047bc8,0x000000008b800000)
+ Metaspace       used 37754K, capacity 40386K, committed 40536K, reserved 1085440K
+  class space    used 4832K, capacity 5129K, committed 5248K, reserved 1048576K
+}
+Event: 38.383 GC heap before
+{Heap before GC invocations=13 (full 2):
+ PSYoungGen      total 338432K, used 338416K [0x00000000d7100000, 0x00000000edc00000, 0x0000000100000000)
+  eden space 321536K, 100% used [0x00000000d7100000,0x00000000eab00000,0x00000000eab00000)
+  from space 16896K, 99% used [0x00000000ec400000,0x00000000ed47c020,0x00000000ed480000)
+  to   space 25088K, 0% used [0x00000000eab00000,0x00000000eab00000,0x00000000ec380000)
+ ParOldGen       total 104448K, used 47390K [0x0000000085200000, 0x000000008b800000, 0x00000000d7100000)
+  object space 104448K, 45% used [0x0000000085200000,0x0000000088047bc8,0x000000008b800000)
+ Metaspace       used 37776K, capacity 40450K, committed 40792K, reserved 1085440K
+  class space    used 4835K, capacity 5129K, committed 5248K, reserved 1048576K
+
+Deoptimization events (10 events):
+Event: 7.538 Thread 0x00007f905800c000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f90494a00f0 method=com.google.inject.internal.MoreTypes.getRawType(Ljava/lang/reflect/Type;)Ljava/lang/Class; @ 13
+Event: 7.539 Thread 0x00007f905800c000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f90494a00f0 method=com.google.inject.internal.MoreTypes.getRawType(Ljava/lang/reflect/Type;)Ljava/lang/Class; @ 13
+Event: 7.628 Thread 0x00007f905800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f904a0df7a4 method=java.io.BufferedOutputStream.write(I)V @ 9
+Event: 7.835 Thread 0x00007f905808b800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f9049eed854 method=java.lang.ref.Reference.tryHandlePending(Z)Z @ 20
+Event: 8.071 Thread 0x00007f905800c000 Uncommon trap: reason=predicate action=maybe_recompile pc=0x00007f904912eb78 method=org.codehaus.plexus.util.SelectorUtils.matchAntPathPattern([Ljava/lang/String;[Ljava/lang/String;Z)Z @ 23
+Event: 8.471 Thread 0x00007f905800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f904a1692ac method=sun.util.calendar.CalendarDate.setMillis(I)Lsun/util/calendar/CalendarDate; @ 5
+Event: 8.471 Thread 0x00007f905800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f9049c6d8d8 method=sun.util.calendar.CalendarDate.setMillis(I)Lsun/util/calendar/CalendarDate; @ 5
+Event: 8.685 Thread 0x00007f905800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f904a135938 method=org.codehaus.plexus.util.SelectorUtils.match(Ljava/lang/String;Ljava/lang/String;Z)Z @ 125
+Event: 9.835 Thread 0x00007f905800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f904919b254 method=com.google.common.collect.AbstractMultimap.getOrCreateCollection(Ljava/lang/Object;)Ljava/util/Collection; @ 15
+Event: 9.835 Thread 0x00007f905800c000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f904950e8f4 method=java.util.zip.ZipOutputStream.putNextEntry(Ljava/util/zip/ZipEntry;)V @ 245
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 6.460 Thread 0x00007f905800c000 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.$anonfun$$minus$minus$1(Lscala/collection/generic/Subtractable;Ljava/lang/Object;)Lscala/collection/generic/Subtractable;> (0x00000000d7252a90) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242
+Event: 6.461 Thread 0x00007f905800c000 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.$anonfun$partition$1(Lscala/Function1;Lscala/collection/mutable/Builder;Lscala/collection/mutable/Builder;Ljava/lang/Object;)Lscala/collection/mutable/Builder;> (0x00000000d725d618) thrown at [/
+Event: 6.576 Thread 0x00007f905800c000 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.$anonfun$flatMap$1(Lscala/collection/mutable/Builder;Lscala/Function1;Ljava/lang/Object;)Lscala/collection/mutable/Builder;> (0x00000000de3fd8d8) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u2
+Event: 6.578 Thread 0x00007f905800c000 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.$anonfun$setAsJavaSetConverter$1(Lscala/collection/convert/DecorateAsJava;Lscala/collection/Set;)Ljava/util/Set;> (0x00000000de42cc18) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/
+Event: 6.578 Thread 0x00007f905800c000 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.$anonfun$asScalaIteratorConverter$1(Lscala/collection/convert/DecorateAsScala;Ljava/util/Iterator;)Lscala/collection/Iterator;> (0x00000000de43a3a8) thrown at [/build/openjdk-8-58sEEn/openjdk-8-
+Event: 6.618 Thread 0x00007f905800c000 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.$anonfun$compose$1(Lscala/Function1;Lscala/Function1;Ljava/lang/Object;)Ljava/lang/Object;> (0x00000000de768940) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/i
+Event: 6.693 Thread 0x00007f905800c000 Exception <a 'sun/nio/fs/UnixException'> (0x00000000df074638) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jni.cpp, line 710]
+Event: 6.730 Thread 0x00007f9059f95000 Exception <a 'sun/nio/fs/UnixException'> (0x00000000df3e59c0) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/prims/jni.cpp, line 710]
+Event: 7.289 Thread 0x00007f905800c000 Implicit null exception at 0x00007f904a07403b to 0x00007f904a076341
+Event: 7.526 Thread 0x00007f905800c000 Exception <a 'java/lang/NoClassDefFoundError': org/sonatype/aether/graph/Dependency> (0x00000000e4a74880) thrown at [/build/openjdk-8-58sEEn/openjdk-8-8u242-b08/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 199]
+
+Events (10 events):
+Event: 19.382 Executing VM operation: RevokeBias
+Event: 19.388 Executing VM operation: RevokeBias done
+Event: 19.391 Thread 0x00007f8fcc002800 Thread exited: 0x00007f8fcc002800
+Event: 28.142 Executing VM operation: RevokeBias
+Event: 29.576 Executing VM operation: RevokeBias done
+Event: 29.713 Thread 0x00007f8fc4001000 Thread exited: 0x00007f8fc4001000
+Event: 37.641 Executing VM operation: RevokeBias
+Event: 37.778 Executing VM operation: RevokeBias done
+Event: 37.778 Thread 0x00007f8fd0001000 Thread exited: 0x00007f8fd0001000
+Event: 38.382 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+85200000-8f500000 rw-p 00000000 00:00 0 
+8f500000-d7100000 ---p 00000000 00:00 0 
+d7100000-edc00000 rw-p 00000000 00:00 0 
+f8a80000-100000000 ---p 00000000 00:00 0 
+100000000-100520000 rw-p 00000000 00:00 0 
+100520000-140000000 ---p 00000000 00:00 0 
+557e3202d000-557e3202e000 r-xp 00000000 08:02 6687783                    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+557e3222d000-557e3222e000 r--p 00000000 08:02 6687783                    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+557e3222e000-557e3222f000 rw-p 00001000 08:02 6687783                    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+557e33059000-557e3307a000 rw-p 00000000 00:00 0                          [heap]
+7f8fac000000-7f8fac021000 rw-p 00000000 00:00 0 
+7f8fac021000-7f8fb0000000 ---p 00000000 00:00 0 
+7f8fb0000000-7f8fb0021000 rw-p 00000000 00:00 0 
+7f8fb0021000-7f8fb4000000 ---p 00000000 00:00 0 
+7f8fb4000000-7f8fb4021000 rw-p 00000000 00:00 0 
+7f8fb4021000-7f8fb8000000 ---p 00000000 00:00 0 
+7f8fb8000000-7f8fb807c000 rw-p 00000000 00:00 0 
+7f8fb807c000-7f8fbc000000 ---p 00000000 00:00 0 
+7f8fbc000000-7f8fbc021000 rw-p 00000000 00:00 0 
+7f8fbc021000-7f8fc0000000 ---p 00000000 00:00 0 
+7f8fc0000000-7f8fc0021000 rw-p 00000000 00:00 0 
+7f8fc0021000-7f8fc4000000 ---p 00000000 00:00 0 
+7f8fc4000000-7f8fc4021000 rw-p 00000000 00:00 0 
+7f8fc4021000-7f8fc8000000 ---p 00000000 00:00 0 
+7f8fc8000000-7f8fc80b3000 rw-p 00000000 00:00 0 
+7f8fc80b3000-7f8fcc000000 ---p 00000000 00:00 0 
+7f8fcc000000-7f8fcc02b000 rw-p 00000000 00:00 0 
+7f8fcc02b000-7f8fd0000000 ---p 00000000 00:00 0 
+7f8fd0000000-7f8fd003e000 rw-p 00000000 00:00 0 
+7f8fd003e000-7f8fd4000000 ---p 00000000 00:00 0 
+7f8fd4000000-7f8fd4021000 rw-p 00000000 00:00 0 
+7f8fd4021000-7f8fd8000000 ---p 00000000 00:00 0 
+7f8fd8000000-7f8fd8021000 rw-p 00000000 00:00 0 
+7f8fd8021000-7f8fdc000000 ---p 00000000 00:00 0 
+7f8fdc000000-7f8fdc021000 rw-p 00000000 00:00 0 
+7f8fdc021000-7f8fe0000000 ---p 00000000 00:00 0 
+7f8fe0000000-7f8fe0021000 rw-p 00000000 00:00 0 
+7f8fe0021000-7f8fe4000000 ---p 00000000 00:00 0 
+7f8fe4000000-7f8fe4024000 rw-p 00000000 00:00 0 
+7f8fe4024000-7f8fe8000000 ---p 00000000 00:00 0 
+7f8fe8000000-7f8fe8021000 rw-p 00000000 00:00 0 
+7f8fe8021000-7f8fec000000 ---p 00000000 00:00 0 
+7f8fec000000-7f8fec021000 rw-p 00000000 00:00 0 
+7f8fec021000-7f8ff0000000 ---p 00000000 00:00 0 
+7f8ff0000000-7f8ff0021000 rw-p 00000000 00:00 0 
+7f8ff0021000-7f8ff4000000 ---p 00000000 00:00 0 
+7f8ff4000000-7f8ff5323000 rw-p 00000000 00:00 0 
+7f8ff5323000-7f8ff8000000 ---p 00000000 00:00 0 
+7f8ff8000000-7f8ff8021000 rw-p 00000000 00:00 0 
+7f8ff8021000-7f8ffc000000 ---p 00000000 00:00 0 
+7f8ffc000000-7f8ffdae2000 rw-p 00000000 00:00 0 
+7f8ffdae2000-7f9000000000 ---p 00000000 00:00 0 
+7f9000000000-7f9001c90000 rw-p 00000000 00:00 0 
+7f9001c90000-7f9004000000 ---p 00000000 00:00 0 
+7f9004000000-7f9004021000 rw-p 00000000 00:00 0 
+7f9004021000-7f9008000000 ---p 00000000 00:00 0 
+7f9008000000-7f9009760000 rw-p 00000000 00:00 0 
+7f9009760000-7f900c000000 ---p 00000000 00:00 0 
+7f900c000000-7f900c021000 rw-p 00000000 00:00 0 
+7f900c021000-7f9010000000 ---p 00000000 00:00 0 
+7f9010000000-7f9010021000 rw-p 00000000 00:00 0 
+7f9010021000-7f9014000000 ---p 00000000 00:00 0 
+7f9014000000-7f9014021000 rw-p 00000000 00:00 0 
+7f9014021000-7f9018000000 ---p 00000000 00:00 0 
+7f9018000000-7f9018021000 rw-p 00000000 00:00 0 
+7f9018021000-7f901c000000 ---p 00000000 00:00 0 
+7f901c000000-7f901c021000 rw-p 00000000 00:00 0 
+7f901c021000-7f9020000000 ---p 00000000 00:00 0 
+7f9020000000-7f9020021000 rw-p 00000000 00:00 0 
+7f9020021000-7f9024000000 ---p 00000000 00:00 0 
+7f9024000000-7f9024021000 rw-p 00000000 00:00 0 
+7f9024021000-7f9028000000 ---p 00000000 00:00 0 
+7f902a7f0000-7f902a8d2000 r--s 00b12000 08:02 15343589                   /home/geospark/.m2/repository/org/apache/spark/spark-core_2.11/2.2.2/spark-core_2.11-2.2.2.jar
+7f902a8d2000-7f902a992000 rw-p 00000000 00:00 0 
+7f902a992000-7f902aad5000 ---p 00000000 00:00 0 
+7f902aad5000-7f902abd3000 rw-p 00000000 00:00 0 
+7f902abd3000-7f902abdc000 r-xp 00000000 08:02 6695447                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f902abdc000-7f902addb000 ---p 00009000 08:02 6695447                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f902addb000-7f902addc000 r--p 00008000 08:02 6695447                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f902addc000-7f902addd000 rw-p 00009000 08:02 6695447                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f902addd000-7f902adde000 r-xp 00000000 08:02 14301887                   /tmp/swoval-jni/7150555810692294152-libswoval-files0.so
+7f902adde000-7f902afdd000 ---p 00001000 08:02 14301887                   /tmp/swoval-jni/7150555810692294152-libswoval-files0.so
+7f902afdd000-7f902afde000 r--p 00000000 08:02 14301887                   /tmp/swoval-jni/7150555810692294152-libswoval-files0.so
+7f902afde000-7f902afdf000 rw-p 00001000 08:02 14301887                   /tmp/swoval-jni/7150555810692294152-libswoval-files0.so
+7f902afdf000-7f902b1df000 rw-p 00000000 00:00 0 
+7f902b1df000-7f902b3d5000 rw-p 00000000 00:00 0 
+7f902b3d5000-7f902b3df000 ---p 00000000 00:00 0 
+7f902b3df000-7f902b3f7000 r-xp 00000000 08:02 14301882                   /tmp/jna-1851870764/jna2048838016240828907.tmp (deleted)
+7f902b3f7000-7f902b5f7000 ---p 00018000 08:02 14301882                   /tmp/jna-1851870764/jna2048838016240828907.tmp (deleted)
+7f902b5f7000-7f902b5f8000 rw-p 00018000 08:02 14301882                   /tmp/jna-1851870764/jna2048838016240828907.tmp (deleted)
+7f902b5f8000-7f902b7f8000 rw-p 00000000 00:00 0 
+7f902b7f8000-7f902b7fb000 ---p 00000000 00:00 0 
+7f902b7fb000-7f902b8f9000 rw-p 00000000 00:00 0 
+7f902b8f9000-7f902b8fc000 ---p 00000000 00:00 0 
+7f902b8fc000-7f902b9fa000 rw-p 00000000 00:00 0 
+7f902b9fa000-7f902b9fd000 ---p 00000000 00:00 0 
+7f902b9fd000-7f902bafb000 rw-p 00000000 00:00 0 
+7f902bafb000-7f902bafe000 ---p 00000000 00:00 0 
+7f902bafe000-7f902bbfc000 rw-p 00000000 00:00 0 
+7f902bbfc000-7f902bbff000 ---p 00000000 00:00 0 
+7f902bbff000-7f902bcfd000 rw-p 00000000 00:00 0 
+7f902bcfd000-7f902bd00000 ---p 00000000 00:00 0 
+7f902bd00000-7f902bdfe000 rw-p 00000000 00:00 0 
+7f902bdfe000-7f902be01000 ---p 00000000 00:00 0 
+7f902be01000-7f902beff000 rw-p 00000000 00:00 0 
+7f902beff000-7f902bf02000 ---p 00000000 00:00 0 
+7f902bf02000-7f902c000000 rw-p 00000000 00:00 0 
+7f902c000000-7f902c021000 rw-p 00000000 00:00 0 
+7f902c021000-7f9030000000 ---p 00000000 00:00 0 
+7f903004c000-7f903004f000 r--s 00006000 08:02 13767756                   /home/geospark/.m2/repository/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar
+7f903004f000-7f9030070000 r--s 00172000 08:02 14160791                   /home/geospark/.m2/repository/com/google/guava/guava/11.0.2/guava-11.0.2.jar
+7f9030070000-7f9030071000 r--s 00008000 08:02 12977361                   /home/geospark/.m2/repository/asm/asm-util/3.2/asm-util-3.2.jar
+7f9030071000-7f9030072000 r--s 00004000 08:02 13111199                   /home/geospark/.m2/repository/asm/asm-analysis/3.2/asm-analysis-3.2.jar
+7f9030072000-7f9030075000 r--s 00013000 08:02 11809745                   /home/geospark/.m2/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar
+7f9030075000-7f9030076000 r--s 00002000 08:02 524898                     /home/geospark/.m2/repository/org/vafer/jdependency/0.7/jdependency-0.7.jar
+7f9030076000-7f903007a000 r--s 0001d000 08:02 15343386                   /home/geospark/.m2/repository/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.jar
+7f903007a000-7f903007d000 r--s 0000c000 08:02 14299620                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-dependency-tree/2.1/maven-dependency-tree-2.1.jar
+7f903007d000-7f9030080000 r--s 00023000 08:02 524896                     /home/geospark/.m2/repository/org/jdom/jdom/1.1/jdom-1.1.jar
+7f9030080000-7f9030082000 r--s 00004000 08:02 13111197                   /home/geospark/.m2/repository/asm/asm-tree/3.3.1/asm-tree-3.3.1.jar
+7f9030082000-7f9030084000 r--s 00008000 08:02 12977359                   /home/geospark/.m2/repository/asm/asm-commons/3.3.1/asm-commons-3.3.1.jar
+7f9030084000-7f9030085000 r--s 0000a000 08:02 13513079                   /home/geospark/.m2/repository/asm/asm/3.3.1/asm-3.3.1.jar
+7f9030085000-7f9030089000 r--s 00035000 08:02 10887050                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.9/plexus-utils-3.0.9.jar
+7f9030089000-7f903008b000 r--s 0000d000 08:02 11273991                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar
+7f903008b000-7f903008f000 r--s 00017000 08:02 11809681                   /home/geospark/.m2/repository/org/sonatype/aether/aether-util/1.7/aether-util-1.7.jar
+7f903008f000-7f903009a000 r--s 00069000 08:02 11677781                   /home/geospark/.m2/repository/org/sonatype/sisu/sisu-guice/2.1.7/sisu-guice-2.1.7-noaop.jar
+7f903009a000-7f903009f000 r--s 00021000 08:02 11677779                   /home/geospark/.m2/repository/org/sonatype/sisu/sisu-inject-bean/1.4.2/sisu-inject-bean-1.4.2.jar
+7f903009f000-7f90300a2000 r--s 00016000 08:02 524816                     /home/geospark/.m2/repository/org/apache/maven/plugins/maven-shade-plugin/2.1/maven-shade-plugin-2.1.jar
+7f90300a2000-7f90300a6000 r--s 00034000 08:02 11933907                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar
+7f90300a6000-7f90300aa000 r--s 0002f000 08:02 13512969                   /home/geospark/.m2/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar
+7f90300aa000-7f90300ad000 r--s 0000c000 08:02 13375062                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.jar
+7f90300ad000-7f90300b2000 r--s 00029000 08:02 13375060                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.jar
+7f90300b2000-7f90300b4000 r--s 0000d000 08:02 13375058                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.jar
+7f90300b4000-7f90300b6000 r--s 00004000 08:02 13375056                   /home/geospark/.m2/repository/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.jar
+7f90300b6000-7f90300b8000 r--s 00007000 08:02 10755857                   /home/geospark/.m2/repository/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.jar
+7f90300b8000-7f90300ba000 r--s 00002000 08:02 15343488                   /home/geospark/.m2/repository/org/apache/maven/plugin-tools/maven-plugin-annotations/3.1/maven-plugin-annotations-3.1.jar
+7f90300ba000-7f90300bb000 r--s 00002000 08:02 12977327                   /home/geospark/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.jar
+7f90300bb000-7f90300bf000 r--s 00035000 08:02 15343486                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar
+7f90300bf000-7f90300c1000 r--s 00006000 08:02 12060777                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-common-artifact-filters/1.3/maven-common-artifact-filters-1.3.jar
+7f90300c1000-7f90300c7000 r--s 00048000 08:02 10755868                   /home/geospark/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar
+7f90300c7000-7f90300cc000 r--s 0003c000 08:02 15343484                   /home/geospark/.m2/repository/org/apache/maven/surefire/maven-surefire-common/2.12.4/maven-surefire-common-2.12.4.jar
+7f90300cc000-7f90300d0000 r--s 00019000 08:02 15343482                   /home/geospark/.m2/repository/org/apache/maven/surefire/surefire-api/2.12.4/surefire-api-2.12.4.jar
+7f90300d0000-7f90300d2000 r--s 00007000 08:02 15080337                   /home/geospark/.m2/repository/org/apache/maven/surefire/surefire-booter/2.12.4/surefire-booter-2.12.4.jar
+7f90300d2000-7f90300d3000 r--s 00007000 08:02 14825206                   /home/geospark/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.jar
+7f90300d3000-7f90300d6000 r--s 0001b000 08:02 15342900                   /home/geospark/.m2/repository/junit/junit/3.8.2/junit-3.8.2.jar
+7f90300d6000-7f90300e4000 r--s 0008f000 08:02 15342899                   /home/geospark/.m2/repository/com/google/collections/google-collections/1.0/google-collections-1.0.jar
+7f90300e4000-7f90300e5000 r--s 0000a000 08:02 15342898                   /home/geospark/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar
+7f90300e5000-7f90300ec000 r--s 00051000 08:02 15342896                   /home/geospark/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar
+7f90300ec000-7f90300f0000 r--s 0001d000 08:02 15342891                   /home/geospark/.m2/repository/org/apache/xbean/xbean-reflect/3.4/xbean-reflect-3.4.jar
+7f90300f0000-7f90300f2000 r--s 00000000 08:02 11811165                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-compiler-manager/2.5/plexus-compiler-manager-2.5.jar
+7f90300f2000-7f90300f4000 r--s 00005000 08:02 11576660                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-compiler-api/2.5/plexus-compiler-api-2.5.jar
+7f90300f4000-7f90300f6000 r--s 00000000 08:02 11809690                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar
+7f90300f6000-7f90300f8000 r--s 00002000 08:02 13767722                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-shared-incremental/1.1/maven-shared-incremental-1.1.jar
+7f90300f8000-7f90300fa000 r--s 00006000 08:02 13767720                   /home/geospark/.m2/repository/com/google/code/findbugs/jsr305/2.0.1/jsr305-2.0.1.jar
+7f90300fa000-7f90302fa000 rw-p 00000000 00:00 0 
+7f90302fa000-7f90304fa000 rw-p 00000000 00:00 0 
+7f90304fa000-7f90306fa000 rw-p 00000000 00:00 0 
+7f90306fa000-7f90308fa000 rw-p 00000000 00:00 0 
+7f90308fa000-7f9030afa000 rw-p 00000000 00:00 0 
+7f9030afa000-7f9030afd000 ---p 00000000 00:00 0 
+7f9030afd000-7f9030bfb000 rw-p 00000000 00:00 0 
+7f9030bfb000-7f9030bfe000 ---p 00000000 00:00 0 
+7f9030bfe000-7f9030cfc000 rw-p 00000000 00:00 0 
+7f9030cfc000-7f9030cff000 ---p 00000000 00:00 0 
+7f9030cff000-7f9030dfd000 rw-p 00000000 00:00 0 
+7f9030dfd000-7f9030e00000 ---p 00000000 00:00 0 
+7f9030e00000-7f9030efe000 rw-p 00000000 00:00 0 
+7f9030efe000-7f9030f01000 ---p 00000000 00:00 0 
+7f9030f01000-7f9034000000 rw-p 00000000 00:00 0 
+7f9034000000-7f9034021000 rw-p 00000000 00:00 0 
+7f9034021000-7f9038000000 ---p 00000000 00:00 0 
+7f9038000000-7f9038001000 r--s 00004000 08:02 12853192                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/2.5/plexus-compiler-javac-2.5.jar
+7f9038001000-7f9038005000 r--s 00026000 08:02 11938437                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-shared-utils/0.7/maven-shared-utils-0.7.jar
+7f9038005000-7f9038007000 r--s 00003000 08:02 12719479                   /home/geospark/.m2/repository/org/slf4j/jcl-over-slf4j/1.5.6/jcl-over-slf4j-1.5.6.jar
+7f9038007000-7f9038009000 r--s 00001000 08:02 12191501                   /home/geospark/.m2/repository/org/slf4j/slf4j-jdk14/1.5.6/slf4j-jdk14-1.5.6.jar
+7f9038009000-7f903800b000 r--s 0000b000 08:02 11277891                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.jar
+7f903800b000-7f903800f000 r--s 00034000 08:02 11049758                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15.jar
+7f903800f000-7f9038011000 r--s 0000a000 08:02 13505582                   /home/geospark/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/3.3/maven-compiler-plugin-3.3.jar
+7f9038011000-7f9038014000 ---p 00000000 00:00 0 
+7f9038014000-7f903804a000 rw-p 00000000 00:00 0 
+7f903804a000-7f90380c4000 r--s 01103000 08:02 6695352                    /usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar
+7f90380c4000-7f90382c4000 rw-p 00000000 00:00 0 
+7f90382c4000-7f90382d7000 r--s 0010b000 08:02 12853213                   /home/geospark/.m2/repository/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar
+7f90382d7000-7f90382e6000 r--s 0014d000 08:02 13898963                   /home/geospark/.m2/repository/com/google/protobuf/protobuf-java/3.7.0/protobuf-java-3.7.0.jar
+7f90382e6000-7f90382e8000 r--s 00017000 08:02 11679371                   /home/geospark/.m2/repository/org/scala-sbt/zinc-classfile_2.12/1.3.2/zinc-classfile_2.12-1.3.2.jar
+7f90382e8000-7f90382ea000 r--s 00002000 08:02 11938457                   /home/geospark/.m2/repository/org/scala-sbt/util-control_2.12/1.3.0/util-control_2.12-1.3.0.jar
+7f90382ea000-7f90382ee000 r--s 00033000 08:02 12853211                   /home/geospark/.m2/repository/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar
+7f90382ee000-7f90382ef000 r--s 00002000 08:02 11812041                   /home/geospark/.m2/repository/org/scala-sbt/launcher-interface/1.0.0/launcher-interface-1.0.0.jar
+7f90382ef000-7f90382f2000 r--s 00035000 08:02 11938455                   /home/geospark/.m2/repository/org/scala-sbt/zinc-compile-core_2.12/1.3.2/zinc-compile-core_2.12-1.3.2.jar
+7f90382f2000-7f90382f8000 r--s 00080000 08:02 12853209                   /home/geospark/.m2/repository/org/scala-lang/modules/scala-xml_2.12/1.0.6/scala-xml_2.12-1.0.6.jar
+7f90382f8000-7f90382fb000 r--s 0002a000 08:02 11938453                   /home/geospark/.m2/repository/org/scala-sbt/sbinary_2.12/0.5.0/sbinary_2.12-0.5.0.jar
+7f90382fb000-7f9038308000 r--s 001ae000 08:02 11812039                   /home/geospark/.m2/repository/org/scala-sbt/zinc-persist_2.12/1.3.2/zinc-persist_2.12-1.3.2.jar
+7f9038308000-7f9038309000 r--s 00003000 08:02 11812037                   /home/geospark/.m2/repository/org/scala-sbt/util-relation_2.12/1.3.0/util-relation_2.12-1.3.0.jar
+7f9038309000-7f903832c000 r--s 00357000 08:02 12720961                   /home/geospark/.m2/repository/org/scala-lang/scala-reflect/2.12.8/scala-reflect-2.12.8.jar
+7f903832c000-7f903832e000 r--s 00011000 08:02 11812035                   /home/geospark/.m2/repository/org/spire-math/jawn-parser_2.12/0.10.4/jawn-parser_2.12-0.10.4.jar
+7f903832e000-7f9038330000 r--s 0000f000 08:02 13771734                   /home/geospark/.m2/repository/com/eed3si9n/shaded-scalajson_2.12/1.0.0-M4/shaded-scalajson_2.12-1.0.0-M4.jar
+7f9038330000-7f9038332000 r--s 00008000 08:02 13771732                   /home/geospark/.m2/repository/com/eed3si9n/sjson-new-scalajson_2.12/0.8.3/sjson-new-scalajson_2.12-0.8.3.jar
+7f9038332000-7f9038335000 r--s 00012000 08:02 13771730                   /home/geospark/.m2/repository/com/lmax/disruptor/3.4.2/disruptor-3.4.2.jar
+7f9038335000-7f9038356000 r--s 0016d000 08:02 11812033                   /home/geospark/.m2/repository/org/apache/logging/log4j/log4j-core/2.11.2/log4j-core-2.11.2.jar
+7f9038356000-7f903835c000 r--s 0003c000 08:02 11812031                   /home/geospark/.m2/repository/org/apache/logging/log4j/log4j-api/2.11.2/log4j-api-2.11.2.jar
+7f903835c000-7f9038360000 r--s 0003e000 08:02 531900                     /home/geospark/.m2/repository/jline/jline/2.14.6/jline-2.14.6.jar
+7f9038360000-7f9038366000 r--s 000be000 08:02 13771728                   /home/geospark/.m2/repository/com/eed3si9n/sjson-new-core_2.12/0.8.3/sjson-new-core_2.12-0.8.3.jar
+7f9038366000-7f903836a000 r--s 00041000 08:02 11679369                   /home/geospark/.m2/repository/org/scala-sbt/util-logging_2.12/1.3.0/util-logging_2.12-1.3.0.jar
+7f903836a000-7f9038384000 r--s 0021e000 08:02 14689458                   /home/geospark/.m2/repository/net/java/dev/jna/jna-platform/4.5.0/jna-platform-4.5.0.jar
+7f9038384000-7f9038388000 r--s 0015c000 08:02 14689456                   /home/geospark/.m2/repository/net/java/dev/jna/jna/4.5.0/jna-4.5.0.jar
+7f9038388000-7f903838d000 r--s 0002f000 08:02 13771727                   /home/geospark/.m2/repository/com/swoval/file-tree-views/2.1.3/file-tree-views-2.1.3.jar
+7f903838d000-7f9038395000 r--s 00091000 08:02 11679367                   /home/geospark/.m2/repository/org/scala-sbt/io_2.12/1.3.0/io_2.12-1.3.0.jar
+7f9038395000-7f9038397000 r--s 00019000 08:02 13771724                   /home/geospark/.m2/repository/com/lihaoyi/sourcecode_2.12/0.1.3/sourcecode_2.12-0.1.3.jar
+7f9038397000-7f9038399000 r--s 0000e000 08:02 13771723                   /home/geospark/.m2/repository/com/lihaoyi/fastparse-utils_2.12/0.4.2/fastparse-utils_2.12-0.4.2.jar
+7f9038399000-7f903839d000 r--s 00047000 08:02 13771720                   /home/geospark/.m2/repository/com/lihaoyi/fastparse_2.12/0.4.2/fastparse_2.12-0.4.2.jar
+7f903839d000-7f903839f000 r--s 00007000 08:02 13771718                   /home/geospark/.m2/repository/com/trueaccord/lenses/lenses_2.12/0.4.12/lenses_2.12-0.4.12.jar
+7f903839f000-7f90383ac000 r--s 001a6000 08:02 13771716                   /home/geospark/.m2/repository/com/trueaccord/scalapb/scalapb-runtime_2.12/0.6.0/scalapb-runtime_2.12-0.6.0.jar
+7f90383ac000-7f90383ad000 r--s 00000000 08:02 11576894                   /home/geospark/.m2/repository/org/scala-sbt/util-interface/1.3.0/util-interface-1.3.0.jar
+7f90383ad000-7f90383b0000 r--s 00014000 08:02 11576883                   /home/geospark/.m2/repository/org/scala-sbt/compiler-interface/1.3.2/compiler-interface-1.3.2.jar
+7f90383b0000-7f9038400000 r--s 009de000 08:02 12458261                   /home/geospark/.m2/repository/org/scala-lang/scala-compiler/2.12.10/scala-compiler-2.12.10.jar
+7f9038400000-7f9038402000 r--s 00012000 08:02 11812029                   /home/geospark/.m2/repository/org/scala-sbt/zinc-classpath_2.12/1.3.2/zinc-classpath_2.12-1.3.2.jar
+7f9038402000-7f9038405000 r--s 00035000 08:02 11679365                   /home/geospark/.m2/repository/org/scala-sbt/compiler-bridge_2.12/1.3.2/compiler-bridge_2.12-1.3.2.jar
+7f9038405000-7f9038407000 r--s 00024000 08:02 11576890                   /home/geospark/.m2/repository/org/scala-sbt/zinc-apiinfo_2.12/1.3.2/zinc-apiinfo_2.12-1.3.2.jar
+7f9038407000-7f903840c000 r--s 00083000 08:02 11576888                   /home/geospark/.m2/repository/org/scala-sbt/zinc-core_2.12/1.3.2/zinc-core_2.12-1.3.2.jar
+7f903840c000-7f9038444000 r--s 004d1000 08:02 12197396                   /home/geospark/.m2/repository/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10.jar
+7f9038444000-7f9038445000 r--s 0000f000 08:02 11576884                   /home/geospark/.m2/repository/org/scala-sbt/zinc_2.12/1.3.2/zinc_2.12-1.3.2.jar
+7f9038445000-7f9038447000 r--s 00007000 08:02 11933918                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-invoker/3.0.1/maven-invoker-3.0.1.jar
+7f9038447000-7f9038448000 r--s 00002000 08:02 14427787                   /home/geospark/.m2/repository/org/apache/maven/doxia/doxia-logging-api/1.9/doxia-logging-api-1.9.jar
+7f9038448000-7f9038449000 r--s 00002000 08:02 13113837                   /home/geospark/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.9/doxia-sink-api-1.9.jar
+7f9038449000-7f903844d000 r--s 0002f000 08:02 11576862                   /home/geospark/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar
+7f903844d000-7f9038450000 r--s 00026000 08:02 11933920                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.2.1/maven-shared-utils-3.2.1.jar
+7f9038450000-7f9038452000 r--s 00005000 08:02 13377478                   /home/geospark/.m2/repository/org/apache/maven/maven-archiver/3.5.0/maven-archiver-3.5.0.jar
+7f9038452000-7f903845a000 r--s 00049000 08:02 14028147                   /home/geospark/.m2/repository/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar
+7f903845a000-7f903845e000 r--s 00017000 08:02 284040                     /home/geospark/.m2/repository/org/tukaani/xz/1.8/xz-1.8.jar
+7f903845e000-7f9038460000 r--s 0000d000 08:02 11576876                   /home/geospark/.m2/repository/org/iq80/snappy/snappy/0.4/snappy-0.4.jar
+7f9038460000-7f903846c000 r--s 0008b000 08:02 11576875                   /home/geospark/.m2/repository/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar
+7f903846c000-7f903846f000 r--s 00010000 08:02 13377479                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-io/3.2.0/plexus-io-3.2.0.jar
+7f903846f000-7f9038474000 r--s 0002b000 08:02 13377477                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-archiver/4.2.1/plexus-archiver-4.2.1.jar
+7f9038474000-7f9038478000 r--s 0003d000 08:02 11576872                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/3.3.0/plexus-utils-3.3.0.jar
+7f9038478000-7f903847a000 r--s 0000c000 08:02 11576871                   /home/geospark/.m2/repository/org/apache/commons/commons-exec/1.3/commons-exec-1.3.jar
+7f903847a000-7f903847c000 r--s 00007000 08:02 14298550                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-dependency-tree/3.0.1/maven-dependency-tree-3.0.1.jar
+7f903847c000-7f9038483000 r--s 00064000 08:02 11576867                   /home/geospark/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar
+7f9038483000-7f9038485000 r--s 00002000 08:02 11411769                   /home/geospark/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar
+7f9038485000-7f9038486000 r--s 00006000 08:02 11273992                   /home/geospark/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar
+7f9038486000-7f9038488000 r--s 00000000 08:02 524762                     /home/geospark/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+7f9038488000-7f9038491000 r--s 0005f000 08:02 14030520                   /home/geospark/.m2/repository/com/google/inject/guice/4.0/guice-4.0-no_aop.jar
+7f9038491000-7f9038495000 r--s 00020000 08:02 284042                     /home/geospark/.m2/repository/org/eclipse/aether/aether-util/1.0.2.v20150114/aether-util-1.0.2.v20150114.jar
+7f9038495000-7f903849c000 r--s 00000000 08:02 6949698                    /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+7f903849c000-7f90384c3000 r--p 00000000 08:02 7474007                    /usr/share/locale-langpack/ko/LC_MESSAGES/libc.mo
+7f90384c3000-7f90384c4000 r--s 00002000 08:02 12977311                   /home/geospark/.m2/repository/org/apache/maven/reporting/maven-reporting-api/3.0/maven-reporting-api-3.0.jar
+7f90384c4000-7f90384cc000 r--s 00055000 08:02 284033                     /home/geospark/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.2/org.eclipse.sisu.inject-0.3.2.jar
+7f90384cc000-7f90384cf000 r--s 00008000 08:02 15474960                   /home/geospark/.m2/repository/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar
+7f90384cf000-7f90384fa000 r--s 001fc000 08:02 14030518                   /home/geospark/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar
+7f90384fa000-7f90386fa000 rw-p 00000000 00:00 0 
+7f90386fa000-7f90386fd000 ---p 00000000 00:00 0 
+7f90386fd000-7f90389fb000 rw-p 00000000 00:00 0 
+7f90389fb000-7f9038bfb000 rw-p 00000000 00:00 0 
+7f9038bfb000-7f9038dfb000 rw-p 00000000 00:00 0 
+7f9038dfb000-7f9038dfd000 r-xp 00000000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f9038dfd000-7f9038ffc000 ---p 00002000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f9038ffc000-7f9038ffd000 r--p 00001000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f9038ffd000-7f9038ffe000 rw-p 00002000 08:02 11146052                   /lib/x86_64-linux-gnu/libutil-2.27.so
+7f9038ffe000-7f9039000000 r--s 00000000 08:02 11576853                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.6/plexus-component-annotations-1.6.jar
+7f9039000000-7f9039003000 r--s 0000d000 08:02 11576857                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.21/plexus-interpolation-1.21.jar
+7f9039003000-7f9039004000 r--s 00003000 08:02 11576850                   /home/geospark/.m2/repository/org/apache/maven/maven-builder-support/3.3.9/maven-builder-support-3.3.9.jar
+7f9039004000-7f9039007000 r--s 0001d000 08:02 13245661                   /home/geospark/.m2/repository/net/alchim31/maven/scala-maven-plugin/4.3.1/scala-maven-plugin-4.3.1.jar
+7f9039007000-7f9039009000 r--s 0000d000 08:02 13243419                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.13/plexus-interpolation-1.13.jar
+7f9039009000-7f903900a000 r--s 00001000 08:02 11677793                   /home/geospark/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.jar
+7f903900a000-7f903900c000 r--s 00009000 08:02 13243417                   /home/geospark/.m2/repository/org/apache/maven/shared/maven-filtering/1.1/maven-filtering-1.1.jar
+7f903900c000-7f9039010000 r--s 00033000 08:02 10887023                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.5/plexus-utils-2.0.5.jar
+7f9039010000-7f9039013000 r--s 0001b000 08:02 12589432                   /home/geospark/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar
+7f9039013000-7f9039015000 r--s 00002000 08:02 13243411                   /home/geospark/.m2/repository/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar
+7f9039015000-7f9039017000 r--s 00006000 08:02 13111142                   /home/geospark/.m2/repository/commons-cli/commons-cli/1.0/commons-cli-1.0.jar
+7f9039017000-7f9039018000 r--s 00001000 08:02 13111137                   /home/geospark/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+7f9039018000-7f9039019000 r--s 00002000 08:02 12977297                   /home/geospark/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+7f9039019000-7f903901b000 r--s 00006000 08:02 11677777                   /home/geospark/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+7f903901b000-7f903901c000 r--s 00001000 08:02 14160269                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven-event-listener.jar
+7f903901c000-7f903901f000 r-xp 00000000 08:02 14286858                   /tmp/libjansi-1.17.1-2294841489980448014.so
+7f903901f000-7f903921e000 ---p 00003000 08:02 14286858                   /tmp/libjansi-1.17.1-2294841489980448014.so
+7f903921e000-7f903921f000 rw-p 00002000 08:02 14286858                   /tmp/libjansi-1.17.1-2294841489980448014.so
+7f903921f000-7f9039224000 r--s 000a3000 08:02 6695489                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar
+7f9039224000-7f9039226000 r--s 00009000 08:02 14160378                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-settings-builder-3.6.1.jar
+7f9039226000-7f9039228000 r--s 00001000 08:02 14160337                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/j2objc-annotations-1.1.jar
+7f9039228000-7f9039229000 r--s 00003000 08:02 14160362                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-builder-support-3.6.1.jar
+7f9039229000-7f903922b000 r--s 00003000 08:02 14160356                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jcl-over-slf4j-1.7.25.jar
+7f903922b000-7f903922f000 r--s 0002f000 08:02 14160330                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/commons-io-2.5.jar
+7f903922f000-7f9039237000 r--s 00073000 08:02 14160331                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/commons-lang3-3.8.1.jar
+7f9039237000-7f9039239000 r--s 00002000 08:02 14160332                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/error_prone_annotations-2.1.3.jar
+7f9039239000-7f9039244000 r--s 00075000 08:02 14160336                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/guice-4.2.1-no_aop.jar
+7f9039244000-7f9039247000 r--s 00012000 08:02 14160387                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-interpolation-1.25.jar
+7f9039247000-7f903924a000 r--s 00026000 08:02 14160379                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-shared-utils-3.2.1.jar
+7f903924a000-7f9039250000 r--s 0002d000 08:02 14160383                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/org.eclipse.sisu.plexus-0.3.3.jar
+7f9039250000-7f9039251000 r--s 00001000 08:02 14160358                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jsr250-api-1.0.jar
+7f9039251000-7f903925e000 r--s 0008e000 08:02 14160364                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-core-3.6.1.jar
+7f903925e000-7f9039261000 r--s 0002b000 08:02 14160366                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-model-3.6.1.jar
+7f9039261000-7f9039263000 r--s 00006000 08:02 14160375                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-transport-wagon-1.3.3.jar
+7f9039263000-7f903926a000 r--s 00056000 08:02 14160381                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/org.eclipse.sisu.inject-0.3.3.jar
+7f903926a000-7f903926e000 r--s 00023000 08:02 14160376                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-util-1.3.3.jar
+7f903926e000-7f9039272000 r--s 00042000 08:02 14160338                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jansi-1.17.1.jar
+7f9039272000-7f9039278000 r--s 00041000 08:02 14160363                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-compat-3.6.1.jar
+7f9039278000-7f90392a6000 r--s 001eb000 08:02 14160393                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/wagon-http-3.3.2-shaded.jar
+7f90392a6000-7f90392a9000 ---p 00000000 00:00 0 
+7f90392a9000-7f90393a7000 rw-p 00000000 00:00 0 
+7f90393a7000-7f90393be000 r-xp 00000000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f90393be000-7f90395bd000 ---p 00017000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f90395bd000-7f90395be000 r--p 00016000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f90395be000-7f90395bf000 rw-p 00017000 08:02 6695449                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f90395bf000-7f90395d0000 r-xp 00000000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f90395d0000-7f90397d0000 ---p 00011000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f90397d0000-7f90397d1000 r--p 00011000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f90397d1000-7f90397d2000 rw-p 00012000 08:02 6695450                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7f90397d2000-7f90397d3000 ---p 00000000 00:00 0 
+7f90397d3000-7f90398d3000 rw-p 00000000 00:00 0 
+7f90398d3000-7f90398d6000 ---p 00000000 00:00 0 
+7f90398d6000-7f90399d4000 rw-p 00000000 00:00 0 
+7f90399d4000-7f90399d5000 ---p 00000000 00:00 0 
+7f90399d5000-7f90399d8000 ---p 00000000 00:00 0 
+7f90399d8000-7f9039ad5000 rw-p 00000000 00:00 0 
+7f9039ad5000-7f9039ad6000 ---p 00000000 00:00 0 
+7f9039ad6000-7f9039ad9000 ---p 00000000 00:00 0 
+7f9039ad9000-7f9039bd6000 rw-p 00000000 00:00 0 
+7f9039bd6000-7f9039bd7000 ---p 00000000 00:00 0 
+7f9039bd7000-7f9039bda000 ---p 00000000 00:00 0 
+7f9039bda000-7f9039cd7000 rw-p 00000000 00:00 0 
+7f9039cd7000-7f9039cd8000 ---p 00000000 00:00 0 
+7f9039cd8000-7f9039cdb000 ---p 00000000 00:00 0 
+7f9039cdb000-7f9039dd8000 rw-p 00000000 00:00 0 
+7f9039dd8000-7f9039ddb000 ---p 00000000 00:00 0 
+7f9039ddb000-7f9039ed9000 rw-p 00000000 00:00 0 
+7f9039ed9000-7f903a9ea000 r--p 00000000 08:02 6691447                    /usr/lib/locale/locale-archive
+7f903a9ea000-7f903a9ed000 ---p 00000000 00:00 0 
+7f903a9ed000-7f903aaeb000 rw-p 00000000 00:00 0 
+7f903aaeb000-7f903aaee000 ---p 00000000 00:00 0 
+7f903aaee000-7f903abec000 rw-p 00000000 00:00 0 
+7f903abec000-7f903abed000 ---p 00000000 00:00 0 
+7f903abed000-7f903c000000 rw-p 00000000 00:00 0 
+7f903c000000-7f903c021000 rw-p 00000000 00:00 0 
+7f903c021000-7f9040000000 ---p 00000000 00:00 0 
+7f9040000000-7f9040001000 r--s 00006000 08:02 14160369                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-repository-metadata-3.6.1.jar
+7f9040001000-7f9040003000 r--s 0000f000 08:02 14160373                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-provider-3.6.1.jar
+7f9040003000-7f9040005000 r--s 00009000 08:02 14160390                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/slf4j-api-1.7.25.jar
+7f9040005000-7f9040006000 r--s 00006000 08:02 14160388                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-sec-dispatcher-1.4.jar
+7f9040006000-7f9040009000 r--s 00016000 08:02 14160365                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-embedder-3.6.1.jar
+7f9040009000-7f904000b000 r--s 00000000 08:02 14160325                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/aopalliance-1.0.jar
+7f904000b000-7f9040010000 r--s 00027000 08:02 14160367                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-model-builder-3.6.1.jar
+7f9040010000-7f9040012000 r--s 00009000 08:02 14160371                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-connector-basic-1.3.3.jar
+7f9040012000-7f9040017000 r--s 00020000 08:02 14160370                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-api-1.3.3.jar
+7f9040017000-7f9040018000 r--s 00005000 08:02 14160380                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-slf4j-provider-3.6.1.jar
+7f9040018000-7f904001a000 r--s 0000c000 08:02 14160329                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/commons-cli-1.4.jar
+7f904001a000-7f904001b000 r--s 00000000 08:02 14160355                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/javax.inject-1.jar
+7f904001b000-7f904001d000 r--s 00007000 08:02 14160374                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-spi-1.3.3.jar
+7f904001d000-7f904001f000 r--s 0000a000 08:02 14160368                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-plugin-api-3.6.1.jar
+7f904001f000-7f9040021000 r--s 00000000 08:02 14160386                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-component-annotations-1.7.1.jar
+7f9040021000-7f9040023000 r--s 00003000 08:02 14160360                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/jsr305-3.0.2.jar
+7f9040023000-7f9040026000 r--s 00008000 08:02 14160326                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/cdi-api-1.0.jar
+7f9040026000-7f9040028000 r--s 0000c000 08:02 14160394                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/wagon-provider-api-3.3.2.jar
+7f9040028000-7f9040058000 r--s 00249000 08:02 14160335                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/guava-25.1-android.jar
+7f9040058000-7f9040073000 r--s 001d6000 08:02 6695473                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar
+7f9040073000-7f904008e000 r--s 00394000 08:02 6695468                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar
+7f904008e000-7f9044000000 rw-p 00000000 00:00 0 
+7f9044000000-7f9044021000 rw-p 00000000 00:00 0 
+7f9044021000-7f9048000000 ---p 00000000 00:00 0 
+7f9048000000-7f9048002000 r--s 00002000 08:02 14160385                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-cipher-1.7.jar
+7f9048002000-7f9048004000 r--s 00006000 08:02 14160327                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/checker-compat-qual-2.0.0.jar
+7f9048004000-7f9048005000 r--s 0000a000 08:02 14160377                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-settings-3.6.1.jar
+7f9048005000-7f9048009000 r--s 0003d000 08:02 14160389                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/plexus-utils-3.2.0.jar
+7f9048009000-7f9048630000 rw-p 00000000 00:00 0 
+7f9048630000-7f9048800000 r--s 03c68000 08:02 6695494                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+7f9048800000-7f9049000000 rw-p 00000000 00:00 0 
+7f9049000000-7f904a1a0000 rwxp 00000000 00:00 0 
+7f904a1a0000-7f9058000000 ---p 00000000 00:00 0 
+7f9058000000-7f905a7b9000 rw-p 00000000 00:00 0 
+7f905a7b9000-7f905c000000 ---p 00000000 00:00 0 
+7f905c000000-7f905c003000 r--s 0000c000 08:02 14160361                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-artifact-3.6.1.jar
+7f905c003000-7f905c004000 r--s 00002000 08:02 14160392                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/wagon-file-3.3.2.jar
+7f905c004000-7f905c586000 rw-p 00000000 00:00 0 
+7f905c586000-7f905c587000 ---p 00000000 00:00 0 
+7f905c587000-7f905c687000 rw-p 00000000 00:00 0 
+7f905c687000-7f905c688000 ---p 00000000 00:00 0 
+7f905c688000-7f905c788000 rw-p 00000000 00:00 0 
+7f905c788000-7f905c789000 ---p 00000000 00:00 0 
+7f905c789000-7f905c889000 rw-p 00000000 00:00 0 
+7f905c889000-7f905c88a000 ---p 00000000 00:00 0 
+7f905c88a000-7f905c98a000 rw-p 00000000 00:00 0 
+7f905c98a000-7f905c98b000 ---p 00000000 00:00 0 
+7f905c98b000-7f905ca8b000 rw-p 00000000 00:00 0 
+7f905ca8b000-7f905ca8c000 ---p 00000000 00:00 0 
+7f905ca8c000-7f905cb8c000 rw-p 00000000 00:00 0 
+7f905cb8c000-7f905cb8d000 ---p 00000000 00:00 0 
+7f905cb8d000-7f905cc8d000 rw-p 00000000 00:00 0 
+7f905cc8d000-7f905cc8e000 ---p 00000000 00:00 0 
+7f905cc8e000-7f905cde0000 rw-p 00000000 00:00 0 
+7f905cde0000-7f905d01e000 ---p 00000000 00:00 0 
+7f905d01e000-7f905d070000 rw-p 00000000 00:00 0 
+7f905d070000-7f905d2ad000 ---p 00000000 00:00 0 
+7f905d2ad000-7f905d363000 rw-p 00000000 00:00 0 
+7f905d363000-7f905d3f5000 ---p 00000000 00:00 0 
+7f905d3f5000-7f905d43d000 rw-p 00000000 00:00 0 
+7f905d43d000-7f905d7b6000 ---p 00000000 00:00 0 
+7f905d7b6000-7f905d7be000 r-xp 00000000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f905d7be000-7f905d9bd000 ---p 00008000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f905d9bd000-7f905d9be000 r--p 00007000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f905d9be000-7f905d9bf000 rw-p 00008000 08:02 6695457                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f905d9bf000-7f905d9ca000 r-xp 00000000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f905d9ca000-7f905dbc9000 ---p 0000b000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f905dbc9000-7f905dbca000 r--p 0000a000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f905dbca000-7f905dbcb000 rw-p 0000b000 08:02 11145977                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f905dbcb000-7f905dbd1000 rw-p 00000000 00:00 0 
+7f905dbd1000-7f905dbe8000 r-xp 00000000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f905dbe8000-7f905dde7000 ---p 00017000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f905dde7000-7f905dde8000 r--p 00016000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f905dde8000-7f905dde9000 rw-p 00017000 08:02 11145971                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f905dde9000-7f905ddeb000 rw-p 00000000 00:00 0 
+7f905ddeb000-7f905ddf6000 r-xp 00000000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f905ddf6000-7f905dff5000 ---p 0000b000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f905dff5000-7f905dff6000 r--p 0000a000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f905dff6000-7f905dff7000 rw-p 0000b000 08:02 11145988                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f905dff7000-7f905dfff000 r-xp 00000000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f905dfff000-7f905e1ff000 ---p 00008000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f905e1ff000-7f905e200000 r--p 00008000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f905e200000-7f905e201000 rw-p 00009000 08:02 11145973                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f905e201000-7f905e22b000 r-xp 00000000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f905e22b000-7f905e42a000 ---p 0002a000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f905e42a000-7f905e42b000 r--p 00029000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f905e42b000-7f905e42d000 rw-p 0002a000 08:02 6695438                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f905e42d000-7f905e43d000 r-xp 00000000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f905e43d000-7f905e63c000 ---p 00010000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f905e63c000-7f905e63e000 r--p 0000f000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f905e63e000-7f905e63f000 rw-p 00011000 08:02 6695456                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f905e63f000-7f905e646000 r-xp 00000000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f905e646000-7f905e845000 ---p 00007000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f905e845000-7f905e846000 r--p 00006000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f905e846000-7f905e847000 rw-p 00007000 08:02 11146028                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f905e847000-7f905e85d000 r-xp 00000000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f905e85d000-7f905ea5d000 ---p 00016000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f905ea5d000-7f905ea5e000 r--p 00016000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f905ea5e000-7f905ea5f000 rw-p 00017000 08:02 11141148                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f905ea5f000-7f905ebfc000 r-xp 00000000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f905ebfc000-7f905edfb000 ---p 0019d000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f905edfb000-7f905edfc000 r--p 0019c000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f905edfc000-7f905edfd000 rw-p 0019d000 08:02 11145950                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f905edfd000-7f905efcc000 r-xp 00000000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f905efcc000-7f905f1cc000 ---p 001cf000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f905f1cc000-7f905f1d7000 r--p 001cf000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f905f1d7000-7f905f1da000 rw-p 001da000 08:02 6685300                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.26
+7f905f1da000-7f905f1dd000 rw-p 00000000 00:00 0 
+7f905f1dd000-7f905fe80000 r-xp 00000000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f905fe80000-7f9060080000 ---p 00ca3000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f9060080000-7f9060114000 r--p 00ca3000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f9060114000-7f906013d000 rw-p 00d37000 08:02 6695459                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f906013d000-7f906016d000 rw-p 00000000 00:00 0 
+7f906016d000-7f9060187000 r-xp 00000000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f9060187000-7f9060386000 ---p 0001a000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f9060386000-7f9060387000 r--p 00019000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f9060387000-7f9060388000 rw-p 0001a000 08:02 11146020                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f9060388000-7f906038c000 rw-p 00000000 00:00 0 
+7f906038c000-7f906038f000 r-xp 00000000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f906038f000-7f906058e000 ---p 00003000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f906058e000-7f906058f000 r--p 00002000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f906058f000-7f9060590000 rw-p 00003000 08:02 11145910                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f9060590000-7f90605ac000 r-xp 00000000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f90605ac000-7f90607ab000 ---p 0001c000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f90607ab000-7f90607ac000 r--p 0001b000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f90607ac000-7f90607ad000 rw-p 0001c000 08:02 11146059                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7f90607ad000-7f9060994000 r-xp 00000000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f9060994000-7f9060b94000 ---p 001e7000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f9060b94000-7f9060b98000 r--p 001e7000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f9060b98000-7f9060b9a000 rw-p 001eb000 08:02 11145887                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f9060b9a000-7f9060b9e000 rw-p 00000000 00:00 0 
+7f9060b9e000-7f9060bac000 r-xp 00000000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f9060bac000-7f9060dab000 ---p 0000e000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f9060dab000-7f9060dac000 r--p 0000d000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f9060dac000-7f9060dad000 rw-p 0000e000 08:02 6695424                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f9060dad000-7f9060dd4000 r-xp 00000000 08:02 11145859                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f9060dd4000-7f9060dd8000 r--s 00029000 08:02 14160372                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/maven-resolver-impl-1.3.3.jar
+7f9060dd8000-7f9060dd9000 r--s 00000000 08:02 14160323                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/lib/animal-sniffer-annotations-1.14.jar
+7f9060dd9000-7f9060ddb000 r--s 0001b000 08:02 6950144                    /home/geospark/apps/idea-IU-192.5728.98/lib/idea_rt.jar
+7f9060ddb000-7f9060ddd000 r--s 0000b000 08:02 14160316                   /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar
+7f9060ddd000-7f9060de2000 r--s 0003d000 08:02 6695475                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar
+7f9060de2000-7f9060de6000 r--s 0003a000 08:02 6695476                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar
+7f9060de6000-7f9060eb1000 rw-p 00000000 00:00 0 
+7f9060eb1000-7f9060eb2000 ---p 00000000 00:00 0 
+7f9060eb2000-7f9060eb5000 ---p 00000000 00:00 0 
+7f9060eb5000-7f9060fb4000 rw-p 00000000 00:00 0 
+7f9060fb4000-7f9060fb5000 r--s 0000d000 08:02 6695474                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar
+7f9060fb5000-7f9060fb7000 r--s 00007000 08:02 7083811                    /usr/share/java/java-atk-wrapper.jar
+7f9060fb7000-7f9060fb9000 r--s 00001000 08:02 6695469                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar
+7f9060fb9000-7f9060fba000 r--s 00010000 08:02 6695477                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar
+7f9060fba000-7f9060fbd000 r--s 0000f000 08:02 6695470                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar
+7f9060fbd000-7f9060fbe000 r--s 0000a000 08:02 6695471                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar
+7f9060fbe000-7f9060fc8000 r--s 00116000 08:02 6695472                    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar
+7f9060fc8000-7f9060fd0000 rw-s 00000000 08:02 14286855                   /tmp/hsperfdata_geospark/27053
+7f9060fd0000-7f9060fd1000 rw-p 00000000 00:00 0 
+7f9060fd1000-7f9060fd2000 ---p 00000000 00:00 0 
+7f9060fd2000-7f9060fd4000 rw-p 00000000 00:00 0 
+7f9060fd4000-7f9060fd5000 r--p 00027000 08:02 11145859                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f9060fd5000-7f9060fd6000 rw-p 00028000 08:02 11145859                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f9060fd6000-7f9060fd7000 rw-p 00000000 00:00 0 
+7ffd77f44000-7ffd77f66000 rw-p 00000000 00:00 0                          [stack]
+7ffd77faf000-7ffd77fb2000 r--p 00000000 00:00 0                          [vvar]
+7ffd77fb2000-7ffd77fb4000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Dmaven.multiModuleProjectDirectory=/home/geospark/IdeaProjects/sparksimpletest -Dmaven.home=/home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3 -Dclassworlds.conf=/home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/bin/m2.conf -Dmaven.ext.class.path=/home/geospark/apps/intellij/plugins/maven/lib/maven-event-listener.jar -Didea.launcher.port=44129 -Didea.launcher.bin.path=/home/geospark/apps/intellij/bin -Dfile.encoding=UTF-8 
+java_command: com.intellij.rt.execution.application.AppMainV2 org.codehaus.classworlds.Launcher -Didea.version2019.2 verify
+java_class_path (initial): /home/geospark/apps/idea-IU-192.5728.98/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar:/home/geospark/apps/idea-IU-192.5728.98/lib/idea_rt.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+PATH=/home/hansub/google-cloud-sdk/bin:/home/geospark/apps/spark/bin:/home/geospark/apps/spark/sbin:/home/geospark/apps/scala-2.11.12/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/local/geospark_hadoop/bin:/usr/local/geospark_hadoop/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/home/geospark/apps/zeppelin/bin
+USERNAME=geospark
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xabc3b0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xabc3b0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x8f0bb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=
