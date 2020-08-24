@@ -36,30 +36,25 @@ object SimpleApp extends App{
       |FROM rawDf
     """.stripMargin)
 
-  var spatialDf_2 = sparkSession.sql(
-    """
-      |SELECT ST_Point(CAST(rawDf._c0 AS Decimal(24,20)),CAST(rawDf._c1 AS Decimal(24,20))) AS checkin_2
-      |FROM rawDf
-    """.stripMargin)
-
   spatialDf.createOrReplaceTempView("spatialdf")
-  spatialDf_2.createOrReplaceTempView("spatialdf_2")
-
   spatialDf.show()
   spatialDf.printSchema()
 
   println("------------------")
 
-  spatialDf_2.show()
-  spatialDf_2.printSchema()
 
-  val loopTimes = 5
+  val loopTimes = 50
 
   sparkSession.catalog.clearCache()
   // Box Range
   println("circle")
 
   elapsedTime(Spatial_CircleRangeQuery(1))
+  
+  println("------------------")
+  println("warm start")
+  println("------------------")
+
   elapsedTime(Spatial_CircleRangeQuery(loopTimes))
 
   sparkSession.stop()
@@ -74,15 +69,24 @@ object SimpleApp extends App{
   }
 
 
-  def Spatial_CircleRangeQuery() {
-    for(i <- 1 to loopTimes) {
-      spatialDf = sparkSession.sql(
-        """
-          |SELECT *
-          |FROM spatialdf
-          |WHERE ST_Distance(ST_Point(1.0,100.0), checkin) < 100
-        """.stripMargin)
-      spatialDf.show()
+  def Spatial_CircleRangeQuery(x: Int): Unit = {
+    val r = scala.util.Random
+    
+    for(i <- 1 to x) {
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*100
+      val y_ = (temp_2-temp_3)*100
+
+      var sql_query = s"""
+                        |SELECT *
+                        |FROM spatialDf
+                        |WHERE ST_Distance(ST_Point($x_, $y_), spatialDf.checkin) < 100
+                      """
+      var spatialDf = sparkSession.sql(sql_query.stripMargin)
+      spatialDf.collect()
     }
   }
 

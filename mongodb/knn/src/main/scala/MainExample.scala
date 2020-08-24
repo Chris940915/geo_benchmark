@@ -39,13 +39,16 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 5
+  val loopTimes = 50
   spatialDf.show()
 
   sparkSession.catalog.clearCache()
   // Box Range
   println("knn")
   elapsedTime(Spatial_KnnQuery(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
   elapsedTime(Spatial_KnnQuery(loopTimes))
 
   def elapsedTime[R](block: => R): R = {
@@ -56,15 +59,24 @@ object MainExample extends App {
     result
   }
 
-  def Spatial_KnnQuery() {
-    for(i <- 1 to loopTimes){
-      spatialDf = sparkSession.sql(
-        """
-          |SELECT checkin, ST_Distance(ST_Point(1.0,100.0), checkin) AS distance
-          |FROM spatialdf
-          |ORDER BY distance DESC
-          |LIMIT 100
-          """.stripMargin)
+  def Spatial_KnnQuery(x: Int): Unit = {
+    val r = scala.util.Random
+
+    for(i <- 1 to x){
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*100
+      val y_ = (temp_2-temp_3)*100
+
+      var sql_query = s"""
+                          |SELECT checkin, ST_Distance(ST_Point($x_,$y_), checkin) AS distance
+                          |FROM spatialDf
+                          |ORDER BY distance DESC
+                          |LIMIT 100
+                        """
+      var spatialDf = sparkSession.sql(sql_query.stripMargin)
       spatialDf.collect()
     }
   }

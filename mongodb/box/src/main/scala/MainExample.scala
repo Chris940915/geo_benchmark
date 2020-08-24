@@ -39,11 +39,14 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 5
+  val loopTimes = 50
   spatialDf.show()
   sparkSession.catalog.clearCache()
   println("box")
   elapsedTime(Spatial_BoxRangeQuery(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
   elapsedTime(Spatial_BoxRangeQuery(loopTimes))
 
 
@@ -55,15 +58,27 @@ object MainExample extends App {
     result
   }
 
+  def Spatial_BoxRangeQuery(x: Int): Unit = {
+    val r = scala.util.Random
 
-  def Spatial_BoxRangeQuery(){
-    for(i <- 1 to loopTimes){
-      var spatialDf = sparkSession.sql(
-        """
-          |SELECT *
-          |FROM spatialdf
-          |WHERE ST_Contains (ST_PolygonFromEnvelope(-180.0,0.0,0.0,136.0), checkin)
-        """.stripMargin)
+    for(i <- 1 to x){
+
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = temp_1 - 0.5
+      val temp_4 = temp_2 - 0.5
+
+      val x_ = temp_1*180
+      val y_ = temp_2*180
+      val min_x_ = temp_3 * 180
+      val min_y_ = temp_4 * 180
+
+      var sql_query = s"""
+                          |SELECT *
+                          |FROM spatialDf
+                          |WHERE ST_Contains (ST_PolygonFromEnvelope($min_x_,$min_y_, $x_, $y_), checkin)
+                        """
+      var spatialDf = sparkSession.sql(sql_query.stripMargin)
       spatialDf.collect()
     }
   }

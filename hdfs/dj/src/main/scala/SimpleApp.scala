@@ -54,13 +54,16 @@ object SimpleApp extends App{
   spatialDf_2.printSchema()
 
 
-  val loopTimes = 5
+  val loopTimes = 50
 
   sparkSession.catalog.clearCache()
   // Box Range
   println("distance join")
 
   elapsedTime(Spatial_DistanceJoin(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
   elapsedTime(Spatial_DistanceJoin(loopTimes))
 
   sparkSession.stop()
@@ -75,8 +78,9 @@ object SimpleApp extends App{
     result
   }
 
-  def Spatial_DistanceJoin(){
-    for(i <- 1 to loopTimes) {
+  def Spatial_DistanceJoin(x: Int): Unit = {
+    for(i <- 1 to x) {
+
       spatialDf = sparkSession.sql(
         """
           | SELECT *

@@ -39,13 +39,16 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 5
+  val loopTimes = 50
   spatialDf.show()
 
   sparkSession.catalog.clearCache()
   // Box Range
   println("circle")
   elapsedTime(Spatial_CircleRangeQuery(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")  
   elapsedTime(Spatial_CircleRangeQuery(loopTimes))
 
   def elapsedTime[R](block: => R): R = {
@@ -56,14 +59,23 @@ object MainExample extends App {
     result
   }
 
-  def Spatial_CircleRangeQuery() {
+  def Spatial_CircleRangeQuery(x: Int): Unit = {
+    val r = scala.util.Random
+
     for(i <- 1 to loopTimes) {
-      spatialDf = sparkSession.sql(
-        """
-          |SELECT *
-          |FROM spatialdf
-          |WHERE ST_Distance(ST_Point(25.0,45.0), checkin) < 100
-        """.stripMargin)
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*100
+      val y_ = (temp_2-temp_3)*100
+
+      var sql_query = s"""
+                        |SELECT *
+                        |FROM spatialDf
+                        |WHERE ST_Distance(ST_Point($x_, $y_), spatialDf.checkin) < 100
+                      """
+      var spatialDf = sparkSession.sql(sql_query.stripMargin)
       spatialDf.show()
     }
   }

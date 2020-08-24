@@ -14,6 +14,7 @@ object MainExample extends App {
   Logger.getLogger("akka").setLevel(Level.WARN)
 
   val mongoUri = "mongodb://127.0.0.1:27017/test.test_2"
+  val mongoUri_2 = "mongodb://127.0.0.1:27017/test.test_2"
 
   val sparkSession = SparkSession.builder()
     .master("local[*]")
@@ -23,27 +24,51 @@ object MainExample extends App {
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
+
+  val sparkSession_2 = SparkSession.builder()
+    .master("local[*]")
+    .appName("Geospark_mongodb")
+    .config("spark.mongodb.output.uri", mongoUri)
+    .config("spark.mongodb.input.uri", mongoUri)
+    .config("spark.serializer", classOf[KryoSerializer].getName)
+    .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
+    .getOrCreate()
+  
   GeoSparkSQLRegistrator.registerAll(sparkSession)
+  GeoSparkSQLRegistrator.registerAll(sparkSession_2)
 
   case class Character(x: Double, y: Double)
 
   val rdd = MongoSpark.load[Character](sparkSession)
+  val rdd_2 = MongoSpark.load[Character](sparkSession_2)
+
   val rawDf = rdd.toDF()
   rawDf.createOrReplaceTempView("rawDf")
-  println(rawDf.printSchema())
+
+  val rawDf_2 = rdd_2.toDF()
+  rawDf_2.createOrReplaceTempView("rawDf_2")
 
   var spatialDf = sparkSession.sql(
     """
       |SELECT ST_Point(CAST(rawDf.x AS Decimal(24,20)),CAST(rawDf.y AS Decimal(24,20))) AS checkin
       |FROM rawDf
     """.stripMargin)
+  
+  var spatialDf_2 = sparkSession_2.sql(
+    """
+      |SELECT ST_Point(CAST(rawDf.x AS Decimal(24,20)),CAST(rawDf.y AS Decimal(24,20))) AS checkin_2
+      |FROM rawDf
+    """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 5
+  val loopTimes = 50
   spatialDf.show()
 
   println("distance join")
   elapsedTime(Spatial_DistanceJoin(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
   elapsedTime(Spatial_DistanceJoin(loopTimes))
 
   def elapsedTime[R](block: => R): R = {
@@ -54,8 +79,8 @@ object MainExample extends App {
     result
   }
 
-  def Spatial_DistanceJoin(){
-    for(i <- 1 to loopTimes) {
+  def Spatial_DistanceJoin(x: Int): Unit = {
+    for(i <- 1 to x) {
       spatialDf = sparkSession.sql(
         """
           | SELECT *
