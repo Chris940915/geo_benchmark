@@ -21,6 +21,7 @@ object MainExample extends App {
     .appName("Geospark_mongodb")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
+    .config("spark.mongodb.input.partitioner" ,"MongoShardedPartitioner")
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
