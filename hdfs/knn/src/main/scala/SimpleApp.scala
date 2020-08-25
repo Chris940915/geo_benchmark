@@ -15,7 +15,7 @@ object SimpleApp extends App{
   Logger.getLogger("akka").setLevel(Level.WARN)
 
   var sparkSession = SparkSession.builder()
-    .master("local[*]") // Delete this if run in cluster mode
+    .master("yarn") // Delete this if run in cluster mode
     .appName("readTestScala") // Change this to a proper name
     // Enable GeoSpark custom Kryo serializer
     .config("spark.serializer", classOf[KryoSerializer].getName)
@@ -53,7 +53,7 @@ object SimpleApp extends App{
   spatialDf_2.show()
   spatialDf_2.printSchema()
 
-  val loopTimes = 50
+  val loopTimes = 30
 
   sparkSession.catalog.clearCache()
   // Box Range

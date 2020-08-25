@@ -29,6 +29,9 @@ object SimpleApp extends App{
   rawDf.createOrReplaceTempView("rawdf")
   print(rawDf.printSchema())
 
+  var rawDf_2 = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_0.1m.csv")
+
+
   //Create a Geometry type column in GeoSparkSQL
   var spatialDf = sparkSession.sql(
     """
@@ -38,8 +41,8 @@ object SimpleApp extends App{
 
   var spatialDf_2 = sparkSession.sql(
     """
-      |SELECT ST_Point(CAST(rawDf._c0 AS Decimal(24,20)),CAST(rawDf._c1 AS Decimal(24,20))) AS checkin_2
-      |FROM rawDf
+      |SELECT ST_Point(CAST(rawDf_2._c0 AS Decimal(24,20)),CAST(rawDf_2._c1 AS Decimal(24,20))) AS checkin_2
+      |FROM rawDf_2
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
@@ -54,7 +57,7 @@ object SimpleApp extends App{
   spatialDf_2.printSchema()
 
 
-  val loopTimes = 50
+  val loopTimes = 30
 
   sparkSession.catalog.clearCache()
   // Box Range
