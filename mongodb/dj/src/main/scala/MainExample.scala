@@ -17,11 +17,12 @@ object MainExample extends App {
   val mongoUri_2 = "mongodb://127.0.0.1:27017/test.test_2"
 
   val sparkSession = SparkSession.builder()
-    .master("local[*]")
+    .master("yarn")
     .appName("Geospark_mongodb")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
     .config("spark.mongodb.input.partitioner" ,"MongoShardedPartitioner")
+    .config("spark.mongodb.input.localThreshold", "15")
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
