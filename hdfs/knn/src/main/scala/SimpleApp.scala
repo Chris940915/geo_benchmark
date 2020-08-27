@@ -23,7 +23,7 @@ object SimpleApp extends App{
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
-  val resourceFolder = "hdfs://localhost:54311/geospark/test/"
+  val resourceFolder = "/localhost:54311/geospark/test/"
 
   var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_10m.csv")
   rawDf.createOrReplaceTempView("rawdf")

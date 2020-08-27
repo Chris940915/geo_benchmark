@@ -15,7 +15,7 @@ object SimpleApp extends App{
   Logger.getLogger("akka").setLevel(Level.WARN)
 
   var sparkSession = SparkSession.builder()
-    .master("local[*]") // Delete this if run in cluster mode
+    .master("yarn") // Delete this if run in cluster mode
     .appName("readTestScala") // Change this to a proper name
     // Enable GeoSpark custom Kryo serializer
     .config("spark.serializer", classOf[KryoSerializer].getName)
@@ -23,13 +23,13 @@ object SimpleApp extends App{
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
-  val resourceFolder = "hdfs://localhost:54311/geospark/test/"
+  val resourceFolder = "/localhost:54311/geospark/test/"
 
   var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_10m.csv")
   rawDf.createOrReplaceTempView("rawdf")
   print(rawDf.printSchema())
 
-  var rawDf_2 = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_0.1m.csv")
+  var rawDf_2 = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_1h.csv")
 
 
   //Create a Geometry type column in GeoSparkSQL
@@ -88,7 +88,7 @@ object SimpleApp extends App{
         """
           | SELECT *
           | FROM spatialdf, spatialdf_2
-          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 100
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 1
       """.stripMargin
       )
       spatialDf.collect()

@@ -28,10 +28,10 @@ object MainExample extends App {
     .getOrCreate()
 
   val sparkSession_2 = SparkSession.builder()
-    .master("local[*]")
+    .master("yarn")
     .appName("Geospark_mongodb")
-    .config("spark.mongodb.output.uri", mongoUri)
-    .config("spark.mongodb.input.uri", mongoUri)
+    .config("spark.mongodb.output.uri", mongoUri_2)
+    .config("spark.mongodb.input.uri", mongoUri_2)
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
@@ -58,11 +58,13 @@ object MainExample extends App {
   
   var spatialDf_2 = sparkSession_2.sql(
     """
-      |SELECT ST_Point(CAST(rawDf.x AS Decimal(24,20)),CAST(rawDf.y AS Decimal(24,20))) AS checkin_2
-      |FROM rawDf
+      |SELECT ST_Point(CAST(rawDf_2.x AS Decimal(24,20)),CAST(rawDf_2.y AS Decimal(24,20))) AS checkin_2
+      |FROM rawDf_2
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
+  spatialDf_2.createOrReplaceTempView("spatialdf_2")
+
   val loopTimes = 50
   spatialDf.show()
 
@@ -87,7 +89,7 @@ object MainExample extends App {
         """
           | SELECT *
           | FROM spatialdf, spatialdf_2
-          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 100
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 1
       """.stripMargin
       )
       spatialDf.collect()

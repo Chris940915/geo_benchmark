@@ -23,7 +23,7 @@ object SimpleApp extends App{
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
-  val resourceFolder = "hdfs://localhost:54311/geospark/test/"
+  val resourceFolder = "/geospark/test/"
 
   var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_10m.csv")
   rawDf.createOrReplaceTempView("rawdf")
@@ -77,8 +77,8 @@ object SimpleApp extends App{
       val temp_2 = r.nextFloat
       val temp_3 = r.nextFloat
 
-      val x_ = (temp_1-temp_2)*100
-      val y_ = (temp_2-temp_3)*100
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*180
 
       var sql_query = s"""
                         |SELECT *
