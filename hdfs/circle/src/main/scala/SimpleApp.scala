@@ -78,7 +78,7 @@ object SimpleApp extends App{
       val temp_3 = r.nextFloat
 
       val x_ = (temp_1-temp_2)*180
-      val y_ = (temp_2-temp_3)*180
+      val y_ = (temp_2-temp_3)*90
 
       var sql_query = s"""
                         |SELECT *

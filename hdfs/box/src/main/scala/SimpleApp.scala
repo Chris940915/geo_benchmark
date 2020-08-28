@@ -81,9 +81,9 @@ object SimpleApp extends App{
       val temp_4 = temp_2 - 0.5
 
       val x_ = temp_1*180
-      val y_ = temp_2*180
+      val y_ = temp_2*90
       val min_x_ = temp_3 * 180
-      val min_y_ = temp_4 * 180
+      val min_y_ = temp_4 * 90
       
       var sql_query = s"""
                           |SELECT *

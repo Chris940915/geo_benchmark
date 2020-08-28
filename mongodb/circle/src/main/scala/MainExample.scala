@@ -20,7 +20,6 @@ object MainExample extends App {
     .appName("Geospark_mongodb")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
-    .config("spark.mongodb.input.localThreshold", "15")
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
@@ -40,7 +39,7 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 50
+  val loopTimes = 30
   spatialDf.show()
 
   sparkSession.catalog.clearCache()
@@ -68,8 +67,8 @@ object MainExample extends App {
       val temp_2 = r.nextFloat
       val temp_3 = r.nextFloat
 
-      val x_ = (temp_1-temp_2)*100
-      val y_ = (temp_2-temp_3)*100
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*90
 
       var sql_query = s"""
                         |SELECT *

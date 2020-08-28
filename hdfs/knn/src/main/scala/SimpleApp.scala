@@ -23,7 +23,7 @@ object SimpleApp extends App{
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
-  val resourceFolder = "/localhost:54311/geospark/test/"
+  val resourceFolder = "/geospark/test/"
 
   var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_10m.csv")
   rawDf.createOrReplaceTempView("rawdf")
@@ -36,22 +36,12 @@ object SimpleApp extends App{
       |FROM rawDf
     """.stripMargin)
 
-  var spatialDf_2 = sparkSession.sql(
-    """
-      |SELECT ST_Point(CAST(rawDf._c0 AS Decimal(24,20)),CAST(rawDf._c1 AS Decimal(24,20))) AS checkin_2
-      |FROM rawDf
-    """.stripMargin)
-
   spatialDf.createOrReplaceTempView("spatialdf")
-  spatialDf_2.createOrReplaceTempView("spatialdf_2")
 
   spatialDf.show()
   spatialDf.printSchema()
 
   println("------------------")
-
-  spatialDf_2.show()
-  spatialDf_2.printSchema()
 
   val loopTimes = 30
 
@@ -86,8 +76,8 @@ object SimpleApp extends App{
       val temp_2 = r.nextFloat
       val temp_3 = r.nextFloat
 
-      val x_ = (temp_1-temp_2)*100
-      val y_ = (temp_2-temp_3)*100
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*90
       
       var sql_query = s"""
                           |SELECT checkin, ST_Distance(ST_Point($x_,$y_), checkin) AS distance

@@ -20,7 +20,6 @@ object MainExample extends App {
     .appName("Geospark_mongodb")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
-    .config("spark.mongodb.input.localThreshold", "15")
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
@@ -70,9 +69,9 @@ object MainExample extends App {
       val temp_4 = temp_2 - 0.5
 
       val x_ = temp_1*180
-      val y_ = temp_2*180
+      val y_ = temp_2*90
       val min_x_ = temp_3 * 180
-      val min_y_ = temp_4 * 180
+      val min_y_ = temp_4 * 90
 
       var sql_query = s"""
                           |SELECT *
