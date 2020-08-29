@@ -62,7 +62,7 @@ object MainExample extends App {
   def Spatial_CircleRangeQuery(x: Int): Unit = {
     val r = scala.util.Random
 
-    for(i <- 1 to loopTimes) {
+    for(i <- 1 to x) {
       val temp_1 = r.nextFloat
       val temp_2 = r.nextFloat
       val temp_3 = r.nextFloat

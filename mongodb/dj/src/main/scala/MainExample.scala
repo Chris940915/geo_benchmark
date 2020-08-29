@@ -63,7 +63,7 @@ object MainExample extends App {
   spatialDf.createOrReplaceTempView("spatialdf")
   spatialDf_2.createOrReplaceTempView("spatialdf_2")
 
-  val loopTimes = 50
+  val loopTimes = 20
   spatialDf.show()
 
   println("distance join")
