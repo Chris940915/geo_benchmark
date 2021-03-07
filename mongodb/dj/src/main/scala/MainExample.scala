@@ -73,6 +73,22 @@ object MainExample extends App {
   println("------------------")
   elapsedTime(Spatial_DistanceJoin(loopTimes))
 
+  println("distance 0.1 join")
+
+  elapsedTime(Spatial_DistanceOneJoin(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+  elapsedTime(Spatial_DistanceOneJoin(loopTimes))
+
+  println("distance 10 join")
+
+  elapsedTime(Spatial_Distance10Join(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+  elapsedTime(Spatial_Distance10Join(loopTimes))
+
   def elapsedTime[R](block: => R): R = {
     val s = System.currentTimeMillis
     val result = block    // call-by-name
@@ -88,6 +104,35 @@ object MainExample extends App {
           | SELECT *
           | FROM spatialdf, spatialdf_2
           | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 1
+      """.stripMargin
+      )
+      spatialDf.collect()
+    }
+  }
+
+
+  def Spatial_DistanceOneJoin(x: Int): Unit = {
+    for(i <- 1 to x) {
+
+      spatialDf = sparkSession.sql(
+        """
+          | SELECT *
+          | FROM spatialdf, spatialdf_2
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 0.1
+      """.stripMargin
+      )
+      spatialDf.collect()
+    }
+  }
+
+  def Spatial_Distance10Join(x: Int): Unit = {
+    for(i <- 1 to x) {
+
+      spatialDf = sparkSession.sql(
+        """
+          | SELECT *
+          | FROM spatialdf, spatialdf_2
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 10
       """.stripMargin
       )
       spatialDf.collect()

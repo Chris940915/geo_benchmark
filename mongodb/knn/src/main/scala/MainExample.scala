@@ -50,6 +50,28 @@ object MainExample extends App {
   println("warm start")
   println("------------------")
   elapsedTime(Spatial_KnnQuery(loopTimes))
+  sparkSession.stop()
+
+
+  println("knn 10")
+
+  elapsedTime(Spatial_Knn10Query(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+
+  elapsedTime(Spatial_Knn10Query(loopTimes))
+
+  println("knn 1000")
+
+  elapsedTime(Spatial_Knn1000Query(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+
+  elapsedTime(Spatial_Knn1000Query(loopTimes))
+
+  sparkSession.stop()
 
   def elapsedTime[R](block: => R): R = {
     val s = System.currentTimeMillis
@@ -77,6 +99,54 @@ object MainExample extends App {
                           |LIMIT 100
                         """
       var spatialDf = sparkSession.sql(sql_query.stripMargin)
+      spatialDf.collect()
+    }
+  }
+
+
+
+  def Spatial_Knn10Query(x: Int): Unit = {
+    val r = scala.util.Random
+
+    for(i <- 1 to x){
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*90
+
+      var sql_query = s"""
+                         |SELECT checkin, ST_Distance(ST_Point($x_,$y_), checkin) AS distance
+                         |FROM spatialDf
+                         |ORDER BY distance DESC
+                         |LIMIT 10
+                        """
+
+      spatialDf = sparkSession.sql(sql_query.stripMargin)
+      spatialDf.collect()
+    }
+  }
+
+  def Spatial_Knn1000Query(x: Int): Unit = {
+    val r = scala.util.Random
+
+    for(i <- 1 to x){
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*90
+
+      var sql_query = s"""
+                         |SELECT checkin, ST_Distance(ST_Point($x_,$y_), checkin) AS distance
+                         |FROM spatialDf
+                         |ORDER BY distance DESC
+                         |LIMIT 1000
+                        """
+
+      spatialDf = sparkSession.sql(sql_query.stripMargin)
       spatialDf.collect()
     }
   }

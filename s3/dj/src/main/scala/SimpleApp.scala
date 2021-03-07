@@ -64,6 +64,29 @@ object SimpleApp extends App{
   elapsedTime(Spatial_DistanceJoin(loopTimes))
 
   sparkSession.stop()
+
+
+  println("distance 0.1 join")
+
+  elapsedTime(Spatial_DistanceOneJoin(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+  elapsedTime(Spatial_DistanceOneJoin(loopTimes))
+
+  sparkSession.stop()
+
+
+  println("distance 10 join")
+
+  elapsedTime(Spatial_Distance10Join(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+  elapsedTime(Spatial_Distance10Join(loopTimes))
+
+  sparkSession.stop()
+
   System.out.println("All GeoSpark DEMOs passed!")
 
 
@@ -88,4 +111,31 @@ object SimpleApp extends App{
     }
   }
 
+  def Spatial_DistanceOneJoin(x: Int): Unit = {
+    for(i <- 1 to x) {
+
+      spatialDf = sparkSession.sql(
+        """
+          | SELECT *
+          | FROM spatialdf, spatialdf_2
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 0.1
+      """.stripMargin
+      )
+      spatialDf.collect()
+    }
+  }
+
+  def Spatial_Distance10Join(x: Int): Unit = {
+    for(i <- 1 to x) {
+
+      spatialDf = sparkSession.sql(
+        """
+          | SELECT *
+          | FROM spatialdf, spatialdf_2
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 10
+      """.stripMargin
+      )
+      spatialDf.collect()
+    }
+  }
 }

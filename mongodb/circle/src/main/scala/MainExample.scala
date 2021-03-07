@@ -50,6 +50,23 @@ object MainExample extends App {
   println("warm start")
   println("------------------")  
   elapsedTime(Spatial_CircleRangeQuery(loopTimes))
+  sparkSession.stop()
+
+  println("circle 10")
+  elapsedTime(Spatial_CircleRange10Query(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+  elapsedTime(Spatial_CircleRange10Query(loopTimes))
+  sparkSession.stop()
+
+  println("circle 1000")
+  elapsedTime(Spatial_CircleRange1000Query(1))
+  println("------------------")
+  println("warm start")
+  println("------------------")
+  elapsedTime(Spatial_CircleRange1000Query(loopTimes))
+  sparkSession.stop()
 
   def elapsedTime[R](block: => R): R = {
     val s = System.currentTimeMillis
@@ -77,6 +94,49 @@ object MainExample extends App {
                       """
       var spatialDf = sparkSession.sql(sql_query.stripMargin)
       spatialDf.show()
+    }
+  }
+
+
+  def Spatial_CircleRange10Query(x: Int): Unit = {
+    val r = scala.util.Random
+
+    for(i <- 1 to x) {
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*90
+
+      var sql_query = s"""
+                         |SELECT *
+                         |FROM spatialDf
+                         |WHERE ST_Distance(ST_Point($x_, $y_), spatialDf.checkin) < 10
+                      """
+      var spatialDf = sparkSession.sql(sql_query.stripMargin)
+      spatialDf.collect()
+    }
+  }
+
+  def Spatial_CircleRange1000Query(x: Int): Unit = {
+    val r = scala.util.Random
+
+    for(i <- 1 to x) {
+      val temp_1 = r.nextFloat
+      val temp_2 = r.nextFloat
+      val temp_3 = r.nextFloat
+
+      val x_ = (temp_1-temp_2)*180
+      val y_ = (temp_2-temp_3)*90
+
+      var sql_query = s"""
+                         |SELECT *
+                         |FROM spatialDf
+                         |WHERE ST_Distance(ST_Point($x_, $y_), spatialDf.checkin) < 10
+                      """
+      var spatialDf = sparkSession.sql(sql_query.stripMargin)
+      spatialDf.collect()
     }
   }
 
