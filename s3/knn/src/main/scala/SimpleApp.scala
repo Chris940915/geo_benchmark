@@ -15,17 +15,17 @@ object SimpleApp extends App{
   Logger.getLogger("akka").setLevel(Level.WARN)
 
   var sparkSession = SparkSession.builder()
-    .master("local[*]") // Delete this if run in cluster mode
-    .appName("readTestScala") // Change this to a proper name
+    .master("yarn") // Delete this if run in cluster mode
+    .appName("S3_knn") // Change this to a proper name
     // Enable GeoSpark custom Kryo serializer
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
-  val resourceFolder = "hdfs://localhost:54311/geospark/test/"
+  val resourceFolder = "s3://geospark/test/"
 
-  var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_10m.csv")
+  var rawDf = sparkSession.read.format("s3selectCSV").option("header", "false").load(resourceFolder+"real_10m.csv")
   rawDf.createOrReplaceTempView("rawdf")
   print(rawDf.printSchema())
 

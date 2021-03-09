@@ -13,7 +13,7 @@ object MainExample extends App {
   Logger.getLogger("org").setLevel(Level.WARN)
   Logger.getLogger("akka").setLevel(Level.WARN)
 
-  val mongoUri = "mongodb://172.31.3.155:20000/exp_1_.random_2"
+  val mongoUri = "mongodb://172.31.1.139:20000/exp_1.z_order"
 
   val sparkSession = SparkSession.builder()
     .master("yarn")
@@ -39,7 +39,7 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 30
+  val loopTimes = 20
   spatialDf.show()
   sparkSession.catalog.clearCache()
   println("box")
@@ -91,8 +91,8 @@ object MainExample extends App {
 
       val temp_1 = r.nextFloat
       val temp_2 = r.nextFloat
-      val temp_3 = temp_1 - 0.5
-      val temp_4 = temp_2 - 0.5
+      val temp_3 = temp_1 - 1.0
+      val temp_4 = temp_2 - 1.0
 
       val x_ = temp_1*180
       val y_ = temp_2*90

@@ -16,7 +16,7 @@ object SimpleApp extends App{
 
   var sparkSession = SparkSession.builder()
     .master("yarn") // Delete this if run in cluster mode
-    .appName("readTestScala") // Change this to a proper name
+    .appName("MongoDB_box") // Change this to a proper name
     // Enable GeoSpark custom Kryo serializer
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)

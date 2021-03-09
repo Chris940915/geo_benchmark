@@ -15,19 +15,20 @@ object SimpleApp extends App{
   Logger.getLogger("akka").setLevel(Level.WARN)
 
   var sparkSession = SparkSession.builder()
-    .master("local[*]") // Delete this if run in cluster mode
-    .appName("readTestScala") // Change this to a proper name
+    .master("yarn") // Delete this if run in cluster mode
+    .appName("S3_dj") // Change this to a proper name
     // Enable GeoSpark custom Kryo serializer
     .config("spark.serializer", classOf[KryoSerializer].getName)
     .config("spark.kryo.registrator", classOf[GeoSparkKryoRegistrator].getName)
     .getOrCreate()
   GeoSparkSQLRegistrator.registerAll(sparkSession)
 
-  val resourceFolder = "hdfs://localhost:54311/geospark/test/"
+  val resourceFolder = "s3://geospark/test/"
 
   var rawDf = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_10m.csv")
   rawDf.createOrReplaceTempView("rawdf")
   print(rawDf.printSchema())
+  var rawDf_2 = sparkSession.read.format("csv").option("header", "false").load(resourceFolder+"real_1h.csv")
 
   //Create a Geometry type column in GeoSparkSQL
   var spatialDf = sparkSession.sql(
@@ -38,8 +39,8 @@ object SimpleApp extends App{
 
   var spatialDf_2 = sparkSession.sql(
     """
-      |SELECT ST_Point(CAST(rawDf._c0 AS Decimal(24,20)),CAST(rawDf._c1 AS Decimal(24,20))) AS checkin_2
-      |FROM rawDf
+      |SELECT ST_Point(CAST(rawDf_2._c0 AS Decimal(24,20)),CAST(rawDf_2._c1 AS Decimal(24,20))) AS checkin_2
+      |FROM rawDf_2
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
@@ -98,13 +99,13 @@ object SimpleApp extends App{
     result
   }
 
-  def Spatial_DistanceJoin(){
-    for(i <- 1 to loopTimes) {
+  def Spatial_DistanceJoin(x: Int): Unit = {
+    for(i <- 1 to x) {
       spatialDf = sparkSession.sql(
         """
           | SELECT *
           | FROM spatialdf, spatialdf_2
-          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 100
+          | WHERE ST_Distance(spatialDf.checkin, spatialDf_2.checkin_2) < 1
       """.stripMargin
       )
       spatialDf.collect()
@@ -113,7 +114,6 @@ object SimpleApp extends App{
 
   def Spatial_DistanceOneJoin(x: Int): Unit = {
     for(i <- 1 to x) {
-
       spatialDf = sparkSession.sql(
         """
           | SELECT *

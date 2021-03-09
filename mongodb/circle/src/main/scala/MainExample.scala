@@ -13,11 +13,11 @@ object MainExample extends App {
   Logger.getLogger("org").setLevel(Level.WARN)
   Logger.getLogger("akka").setLevel(Level.WARN)
 
-  val mongoUri = "mongodb://172.31.3.155:20000/exp_1_.random_2"
+  val mongoUri = "mongodb://172.31.1.139:20000/exp_1.z_order"
 
   val sparkSession = SparkSession.builder()
     .master("yarn")
-    .appName("Geospark_mongodb")
+    .appName("MongoDB_cirlce")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
     .config("spark.serializer", classOf[KryoSerializer].getName)
@@ -39,7 +39,7 @@ object MainExample extends App {
     """.stripMargin)
 
   spatialDf.createOrReplaceTempView("spatialdf")
-  val loopTimes = 30
+  val loopTimes = 20
   spatialDf.show()
 
   sparkSession.catalog.clearCache()
@@ -133,7 +133,7 @@ object MainExample extends App {
       var sql_query = s"""
                          |SELECT *
                          |FROM spatialDf
-                         |WHERE ST_Distance(ST_Point($x_, $y_), spatialDf.checkin) < 10
+                         |WHERE ST_Distance(ST_Point($x_, $y_), spatialDf.checkin) < 1000
                       """
       var spatialDf = sparkSession.sql(sql_query.stripMargin)
       spatialDf.collect()

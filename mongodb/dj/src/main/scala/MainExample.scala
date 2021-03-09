@@ -13,12 +13,12 @@ object MainExample extends App {
   Logger.getLogger("org").setLevel(Level.WARN)
   Logger.getLogger("akka").setLevel(Level.WARN)
 
-  val mongoUri = "mongodb://127.0.0.1:27017/test.test_2"
-  val mongoUri_2 = "mongodb://127.0.0.1:27017/test.test_2"
+  val mongoUri = "mongodb://172.31.1.139:20000/exp_1.z_order"
+  val mongoUri_2 = "mongodb://172.31.1.139:20000/exp_1.z_order"
 
   val sparkSession = SparkSession.builder()
     .master("yarn")
-    .appName("Geospark_mongodb")
+    .appName("MongoDB_dj")
     .config("spark.mongodb.output.uri", mongoUri)
     .config("spark.mongodb.input.uri", mongoUri)
     .config("spark.serializer", classOf[KryoSerializer].getName)
