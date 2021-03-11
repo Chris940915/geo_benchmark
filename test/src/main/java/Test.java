@@ -81,20 +81,25 @@ public class Test {
 
     public static void S3Test(){
         Regions clientRegion = Regions.DEFAULT_REGION;
-        String bucketName = "test";
-        String key = "xUF9c2+093eljRY+DLIX3PtlRzQjvHiHdS4Gz6+v";
+        String bucketName = "geobenchmark";
+        String KEY_ID = "AKIAYGNFNBXEOT7N5POH";
+        String SECRET_ACCESS_KEY = "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";
 
         S3Object fullObject = null, objectPortion = null, headerOverrideObject = null;
         try {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                    .withRegion(clientRegion)
+                    .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(
+                            KEY_ID,
+                            SECRET_ACCESS_KEY)
+                    ))
+                    .withRegion(Regions.AP_NORTHEAST_2)
                     .withCredentials(new ProfileCredentialsProvider())
                     .build();
 
             // Get an object and print its contents.
             System.out.println("Downloading an object");
             long start = System.currentTimeMillis();
-            fullObject = s3Client.getObject(new GetObjectRequest(bucketName, key));
+            fullObject = s3Client.getObject(bucketName);
             long finish = System.currentTimeMillis();
             long timeElapsed = finish - start;
             System.out.println("S3 Elapsed Time : " + timeElapsed);
