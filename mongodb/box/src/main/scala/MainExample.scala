@@ -13,8 +13,6 @@ object MainExample extends App {
   Logger.getLogger("org").setLevel(Level.WARN)
   Logger.getLogger("akka").setLevel(Level.WARN)
 
-  val mongoUri = "mongodb://172.31.1.139:20000/exp_1.z_order"
-
   val sparkSession = SparkSession.builder()
     .master("yarn")
     .appName("Geospark_mongodb")

@@ -18,7 +18,6 @@ public class ReadTest {
     public static void main(String[] args) throws IOException {
         Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "test";
-        String key = "xUF9c2+093eljRY+DLIX3PtlRzQjvHiHdS4Gz6+v";
 
         S3Object fullObject = null, objectPortion = null, headerOverrideObject = null;
         try {
