@@ -24,5 +24,4 @@ Spark 작업 제출 방법 중 Jar(Java Archive)파일로 변환 후, Spark-subm
   --class [class-name] \
   --deploy-mode [cluster] \
   --master [yarn] \ 
-  --conf <key>=<value> \
   ./target/[jar-name].jar
